@@ -49,10 +49,17 @@ jobs:
 
     - uses: actions/checkout@v2
 
+    - name: make bin dir
+      working-directory: ${{github.workspace}}
+      run: |
+          mkdir bin
+
     - name: Download POS Binaries
       uses: actions/download-artifact@v3
       with:
         name: POS-Binaries
+        path: |
+          ${{github.workspace}}/bin
 
     - name: IO + Exception Simple
       working-directory: ${{github.workspace}}
@@ -78,10 +85,17 @@ jobs:
 
     - uses: actions/checkout@v2
 
+    - name: make bin dir
+      working-directory: ${{github.workspace}}
+      run: |
+          mkdir bin
+
     - name: Download POS Binaries
       uses: actions/download-artifact@v3
       with:
         name: POS-Binaries
+        path: |
+          ${{github.workspace}}/bin
 
     - name: Normal IO Test
       working-directory: ${{github.workspace}}
@@ -119,10 +133,17 @@ jobs:
 
     - uses: actions/checkout@v2
 
+    - name: make bin dir
+      working-directory: ${{github.workspace}}
+      run: |
+          mkdir bin
+
     - name: Download POS Binaries
       uses: actions/download-artifact@v3
       with:
         name: POS-Binaries
+        path: |
+          ${{github.workspace}}/bin
     
     - name: Rebuild SPOR Test
       working-directory: ${{github.workspace}}
@@ -149,10 +170,17 @@ jobs:
 
     - uses: actions/checkout@v2
 
+    - name: make bin dir
+      working-directory: ${{github.workspace}}
+      run: |
+          mkdir bin
+
     - name: Download POS Binaries
       uses: actions/download-artifact@v3
       with:
         name: POS-Binaries
+        path: |
+          ${{github.workspace}}/bin
     
     - name: Rebuild Test 
       working-directory: ${{github.workspace}}
@@ -179,10 +207,17 @@ jobs:
 
     - uses: actions/checkout@v2
 
+    - name: make bin dir
+      working-directory: ${{github.workspace}}
+      run: |
+          mkdir bin
+
     - name: Download POS Binaries
       uses: actions/download-artifact@v3
       with:
         name: POS-Binaries
+        path: |
+          ${{github.workspace}}/bin
     
     - name: Rotational Rebuild Test
       working-directory: ${{github.workspace}}
@@ -208,10 +243,17 @@ jobs:
 
     - uses: actions/checkout@v2
 
+    - name: make bin dir
+      working-directory: ${{github.workspace}}
+      run: |
+          mkdir bin
+
     - name: Download POS Binaries
       uses: actions/download-artifact@v3
       with:
         name: POS-Binaries
+        path: |
+          ${{github.workspace}}/bin
          
     # Need separation building from running
     - name: UT Build and Run
@@ -250,10 +292,17 @@ jobs:
 
     - uses: actions/checkout@v2
 
+    - name: make bin dir
+      working-directory: ${{github.workspace}}
+      run: |
+          mkdir bin
+
     - name: Download POS Binaries
       uses: actions/download-artifact@v3
       with:
         name: POS-Binaries
+        path: |
+          ${{github.workspace}}/bin
     
     - name: Volume Test
       working-directory: ${{github.workspace}}
@@ -279,10 +328,17 @@ jobs:
 
     - uses: actions/checkout@v2
 
+    - name: make bin dir
+      working-directory: ${{github.workspace}}
+      run: |
+          mkdir bin
+
     - name: Download POS Binaries
       uses: actions/download-artifact@v3
       with:
         name: POS-Binaries
+        path: |
+          ${{github.workspace}}/bin
     
     - name: WBT Command Test
       working-directory: ${{github.workspace}}
