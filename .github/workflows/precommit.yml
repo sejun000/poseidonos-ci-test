@@ -61,6 +61,11 @@ jobs:
         path: |
           ${{github.workspace}}/bin
 
+    - name: change mode bin
+      working-directory: ${{github.workspace}}
+      run: |
+          chmod +x bin/*
+
     - name: IO + Exception Simple
       working-directory: ${{github.workspace}}
       run: |
@@ -96,6 +101,11 @@ jobs:
         name: POS-Binaries
         path: |
           ${{github.workspace}}/bin
+
+    - name: change mode bin
+      working-directory: ${{github.workspace}}
+      run: |
+          chmod +x bin/*
 
     - name: Normal IO Test
       working-directory: ${{github.workspace}}
@@ -144,7 +154,12 @@ jobs:
         name: POS-Binaries
         path: |
           ${{github.workspace}}/bin
-    
+
+    - name: change mode bin
+      working-directory: ${{github.workspace}}
+      run: |
+          chmod +x bin/*
+
     - name: Rebuild SPOR Test
       working-directory: ${{github.workspace}}
       run: |
@@ -181,6 +196,11 @@ jobs:
         name: POS-Binaries
         path: |
           ${{github.workspace}}/bin
+
+    - name: change mode bin
+      working-directory: ${{github.workspace}}
+      run: |
+          chmod +x bin/*
     
     - name: Rebuild Test 
       working-directory: ${{github.workspace}}
@@ -218,7 +238,12 @@ jobs:
         name: POS-Binaries
         path: |
           ${{github.workspace}}/bin
-    
+
+    - name: change mode bin
+      working-directory: ${{github.workspace}}
+      run: |
+          chmod +x bin/*
+
     - name: Rotational Rebuild Test
       working-directory: ${{github.workspace}}
       run: |
@@ -254,7 +279,12 @@ jobs:
         name: POS-Binaries
         path: |
           ${{github.workspace}}/bin
-         
+
+    - name: change mode bin
+      working-directory: ${{github.workspace}}
+      run: |
+          chmod +x bin/*
+
     # Need separation building from running
     - name: UT Build and Run
       working-directory: ${{github.workspace}}
@@ -303,7 +333,12 @@ jobs:
         name: POS-Binaries
         path: |
           ${{github.workspace}}/bin
-    
+
+    - name: change mode bin
+      working-directory: ${{github.workspace}}
+      run: |
+          chmod +x bin/*
+
     - name: Volume Test
       working-directory: ${{github.workspace}}
       run: |
@@ -339,7 +374,12 @@ jobs:
         name: POS-Binaries
         path: |
           ${{github.workspace}}/bin
-    
+
+    - name: change mode bin
+      working-directory: ${{github.workspace}}
+      run: |
+          chmod +x bin/*
+
     - name: WBT Command Test
       working-directory: ${{github.workspace}}
       run: |
