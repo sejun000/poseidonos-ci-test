@@ -52,7 +52,7 @@ jobs:
     - name: Test Setup
       working-directory: ${{github.workspace}}
       run: | 
-        sudo .script/pkgdep.sh
+        sudo script/pkgdep.sh
         sudo ./configure --with-fpic 
         cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
         sudo cp -f config/air_ci.cfg config/air.cfg
@@ -98,7 +98,7 @@ jobs:
     - name: Test Setup
       working-directory: ${{github.workspace}}
       run: | 
-        sudo .script/pkgdep.sh
+        sudo script/pkgdep.sh
         sudo ./configure --with-fpic 
         cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
         sudo cp -f config/air_ci.cfg config/air.cfg
@@ -156,7 +156,7 @@ jobs:
     - name: Test Setup
       working-directory: ${{github.workspace}}
       run: | 
-        sudo .script/pkgdep.sh
+        sudo script/pkgdep.sh
         sudo ./configure --with-fpic 
         cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
         sudo cp -f config/air_ci.cfg config/air.cfg
@@ -203,7 +203,7 @@ jobs:
     - name: Test Setup
       working-directory: ${{github.workspace}}
       run: | 
-        sudo .script/pkgdep.sh
+        sudo script/pkgdep.sh
         sudo ./configure --with-fpic 
         cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
         sudo cp -f config/air_ci.cfg config/air.cfg
@@ -250,7 +250,7 @@ jobs:
     - name: Test Setup
       working-directory: ${{github.workspace}}
       run: | 
-        sudo .script/pkgdep.sh
+        sudo script/pkgdep.sh
         sudo ./configure --with-fpic 
         cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
         sudo cp -f config/air_ci.cfg config/air.cfg
@@ -296,7 +296,7 @@ jobs:
     - name: Test Setup
       working-directory: ${{github.workspace}}
       run: | 
-        sudo .script/pkgdep.sh
+        sudo script/pkgdep.sh
         sudo ./configure --with-fpic 
         cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
         sudo cp -f config/air_ci.cfg config/air.cfg
@@ -355,7 +355,7 @@ jobs:
     - name: Test Setup
       working-directory: ${{github.workspace}}
       run: | 
-        sudo .script/pkgdep.sh
+        sudo script/pkgdep.sh
         sudo ./configure --with-fpic 
         cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
         sudo cp -f config/air_ci.cfg config/air.cfg
@@ -401,7 +401,7 @@ jobs:
     - name: Test Setup
       working-directory: ${{github.workspace}}
       run: | 
-        sudo .script/pkgdep.sh
+        sudo script/pkgdep.sh
         sudo ./configure --with-fpic 
         cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
         sudo cp -f config/air_ci.cfg config/air.cfg
