@@ -71,6 +71,20 @@ jobs:
       run: |
           sudo chmod -R +x bin
 
+    - name: POS setup
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo make install
+          sudo make udev_install
+          sudo ./script/setup_env.sh
+          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo rmmod nvme_tcp
+          sudo rmmod nvme_rdma
+          sudo rmmod nvme_fabrics
+          sudo modprobe nvme_tcp
+          sudo modprobe nvme_rdma
+          sudo modprobe nvme_fabrics
+
     - name: IO + Exception Simple
       working-directory: ${{github.workspace}}
       run: |
@@ -116,6 +130,20 @@ jobs:
       working-directory: ${{github.workspace}}
       run: |
           sudo chmod -R +x bin
+
+    - name: POS setup
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo make install
+          sudo make udev_install
+          sudo ./script/setup_env.sh
+          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo rmmod nvme_tcp
+          sudo rmmod nvme_rdma
+          sudo rmmod nvme_fabrics
+          sudo modprobe nvme_tcp
+          sudo modprobe nvme_rdma
+          sudo modprobe nvme_fabrics
 
     - name: Normal IO Test
       working-directory: ${{github.workspace}}
@@ -175,6 +203,20 @@ jobs:
       run: |
           sudo chmod -R +x bin
 
+    - name: POS setup
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo make install
+          sudo make udev_install
+          sudo ./script/setup_env.sh
+          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo rmmod nvme_tcp
+          sudo rmmod nvme_rdma
+          sudo rmmod nvme_fabrics
+          sudo modprobe nvme_tcp
+          sudo modprobe nvme_rdma
+          sudo modprobe nvme_fabrics
+
     - name: Rebuild SPOR Test
       working-directory: ${{github.workspace}}
       run: |
@@ -221,7 +263,21 @@ jobs:
       working-directory: ${{github.workspace}}
       run: |
           sudo chmod -R +x bin
-    
+
+    - name: POS setup
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo make install
+          sudo make udev_install
+          sudo ./script/setup_env.sh
+          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo rmmod nvme_tcp
+          sudo rmmod nvme_rdma
+          sudo rmmod nvme_fabrics
+          sudo modprobe nvme_tcp
+          sudo modprobe nvme_rdma
+          sudo modprobe nvme_fabrics
+
     - name: Rebuild Test 
       working-directory: ${{github.workspace}}
       run: |
@@ -269,6 +325,20 @@ jobs:
       run: |
           sudo chmod -R +x bin
 
+    - name: POS setup
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo make install
+          sudo make udev_install
+          sudo ./script/setup_env.sh
+          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo rmmod nvme_tcp
+          sudo rmmod nvme_rdma
+          sudo rmmod nvme_fabrics
+          sudo modprobe nvme_tcp
+          sudo modprobe nvme_rdma
+          sudo modprobe nvme_fabrics
+
     - name: Rotational Rebuild Test
       working-directory: ${{github.workspace}}
       run: |
@@ -314,6 +384,20 @@ jobs:
       working-directory: ${{github.workspace}}
       run: |
           sudo chmod -R +x bin
+
+    - name: POS setup
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo make install
+          sudo make udev_install
+          sudo ./script/setup_env.sh
+          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo rmmod nvme_tcp
+          sudo rmmod nvme_rdma
+          sudo rmmod nvme_fabrics
+          sudo modprobe nvme_tcp
+          sudo modprobe nvme_rdma
+          sudo modprobe nvme_fabrics
 
     # Need separation building from running
     - name: UT Build and Run
@@ -374,6 +458,20 @@ jobs:
       run: |
           sudo chmod -R +x bin
 
+    - name: POS setup
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo make install
+          sudo make udev_install
+          sudo ./script/setup_env.sh
+          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo rmmod nvme_tcp
+          sudo rmmod nvme_rdma
+          sudo rmmod nvme_fabrics
+          sudo modprobe nvme_tcp
+          sudo modprobe nvme_rdma
+          sudo modprobe nvme_fabrics
+
     - name: Volume Test
       working-directory: ${{github.workspace}}
       run: |
@@ -419,6 +517,20 @@ jobs:
       working-directory: ${{github.workspace}}
       run: |
           sudo chmod -R +x bin
+
+    - name: POS setup
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo make install
+          sudo make udev_install
+          sudo ./script/setup_env.sh
+          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo rmmod nvme_tcp
+          sudo rmmod nvme_rdma
+          sudo rmmod nvme_fabrics
+          sudo modprobe nvme_tcp
+          sudo modprobe nvme_rdma
+          sudo modprobe nvme_fabrics
 
     - name: WBT Command Test
       working-directory: ${{github.workspace}}
