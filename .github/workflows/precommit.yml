@@ -49,10 +49,15 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - name: make bin dir
+    - name: Test Setup
       working-directory: ${{github.workspace}}
-      run: |
-          mkdir bin
+      run: | 
+        sudo .script/pkgdep.sh
+        sudo ./configure --with-fpic 
+        cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
+        sudo cp -f config/air_ci.cfg config/air.cfg
+        sudo make CACHE=Y -j ${job_number} -C lib
+        sudo mkdir bin
 
     - name: Download POS Binaries
       uses: actions/download-artifact@v3
@@ -61,10 +66,10 @@ jobs:
         path: |
           ${{github.workspace}}/bin
 
-    - name: change mode bin
+    - name: change mode
       working-directory: ${{github.workspace}}
       run: |
-          chmod +x bin/*
+          sudo chmod -R +x bin
 
     - name: IO + Exception Simple
       working-directory: ${{github.workspace}}
@@ -90,10 +95,15 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - name: make bin dir
+    - name: Test Setup
       working-directory: ${{github.workspace}}
-      run: |
-          mkdir bin
+      run: | 
+        sudo .script/pkgdep.sh
+        sudo ./configure --with-fpic 
+        cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
+        sudo cp -f config/air_ci.cfg config/air.cfg
+        sudo make CACHE=Y -j ${job_number} -C lib
+        sudo mkdir bin
 
     - name: Download POS Binaries
       uses: actions/download-artifact@v3
@@ -102,10 +112,10 @@ jobs:
         path: |
           ${{github.workspace}}/bin
 
-    - name: change mode bin
+    - name: change mode
       working-directory: ${{github.workspace}}
       run: |
-          chmod +x bin/*
+          sudo chmod -R +x bin
 
     - name: Normal IO Test
       working-directory: ${{github.workspace}}
@@ -143,10 +153,15 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - name: make bin dir
+    - name: Test Setup
       working-directory: ${{github.workspace}}
-      run: |
-          mkdir bin
+      run: | 
+        sudo .script/pkgdep.sh
+        sudo ./configure --with-fpic 
+        cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
+        sudo cp -f config/air_ci.cfg config/air.cfg
+        sudo make CACHE=Y -j ${job_number} -C lib
+        sudo mkdir bin
 
     - name: Download POS Binaries
       uses: actions/download-artifact@v3
@@ -155,10 +170,10 @@ jobs:
         path: |
           ${{github.workspace}}/bin
 
-    - name: change mode bin
+    - name: change mode
       working-directory: ${{github.workspace}}
       run: |
-          chmod +x bin/*
+          sudo chmod -R +x bin
 
     - name: Rebuild SPOR Test
       working-directory: ${{github.workspace}}
@@ -185,10 +200,15 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - name: make bin dir
+    - name: Test Setup
       working-directory: ${{github.workspace}}
-      run: |
-          mkdir bin
+      run: | 
+        sudo .script/pkgdep.sh
+        sudo ./configure --with-fpic 
+        cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
+        sudo cp -f config/air_ci.cfg config/air.cfg
+        sudo make CACHE=Y -j ${job_number} -C lib
+        sudo mkdir bin
 
     - name: Download POS Binaries
       uses: actions/download-artifact@v3
@@ -197,10 +217,10 @@ jobs:
         path: |
           ${{github.workspace}}/bin
 
-    - name: change mode bin
+    - name: change mode
       working-directory: ${{github.workspace}}
       run: |
-          chmod +x bin/*
+          sudo chmod -R +x bin
     
     - name: Rebuild Test 
       working-directory: ${{github.workspace}}
@@ -227,10 +247,15 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - name: make bin dir
+    - name: Test Setup
       working-directory: ${{github.workspace}}
-      run: |
-          mkdir bin
+      run: | 
+        sudo .script/pkgdep.sh
+        sudo ./configure --with-fpic 
+        cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
+        sudo cp -f config/air_ci.cfg config/air.cfg
+        sudo make CACHE=Y -j ${job_number} -C lib
+        sudo mkdir bin
 
     - name: Download POS Binaries
       uses: actions/download-artifact@v3
@@ -239,10 +264,10 @@ jobs:
         path: |
           ${{github.workspace}}/bin
 
-    - name: change mode bin
+    - name: change mode
       working-directory: ${{github.workspace}}
       run: |
-          chmod +x bin/*
+          sudo chmod -R +x bin
 
     - name: Rotational Rebuild Test
       working-directory: ${{github.workspace}}
@@ -268,10 +293,15 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - name: make bin dir
+    - name: Test Setup
       working-directory: ${{github.workspace}}
-      run: |
-          mkdir bin
+      run: | 
+        sudo .script/pkgdep.sh
+        sudo ./configure --with-fpic 
+        cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
+        sudo cp -f config/air_ci.cfg config/air.cfg
+        sudo make CACHE=Y -j ${job_number} -C lib
+        sudo mkdir bin
 
     - name: Download POS Binaries
       uses: actions/download-artifact@v3
@@ -280,10 +310,10 @@ jobs:
         path: |
           ${{github.workspace}}/bin
 
-    - name: change mode bin
+    - name: change mode
       working-directory: ${{github.workspace}}
       run: |
-          chmod +x bin/*
+          sudo chmod -R +x bin
 
     # Need separation building from running
     - name: UT Build and Run
@@ -322,10 +352,15 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - name: make bin dir
+    - name: Test Setup
       working-directory: ${{github.workspace}}
-      run: |
-          mkdir bin
+      run: | 
+        sudo .script/pkgdep.sh
+        sudo ./configure --with-fpic 
+        cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
+        sudo cp -f config/air_ci.cfg config/air.cfg
+        sudo make CACHE=Y -j ${job_number} -C lib
+        sudo mkdir bin
 
     - name: Download POS Binaries
       uses: actions/download-artifact@v3
@@ -334,10 +369,10 @@ jobs:
         path: |
           ${{github.workspace}}/bin
 
-    - name: change mode bin
+    - name: change mode
       working-directory: ${{github.workspace}}
       run: |
-          chmod +x bin/*
+          sudo chmod -R +x bin
 
     - name: Volume Test
       working-directory: ${{github.workspace}}
@@ -363,10 +398,15 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - name: make bin dir
+    - name: Test Setup
       working-directory: ${{github.workspace}}
-      run: |
-          mkdir bin
+      run: | 
+        sudo .script/pkgdep.sh
+        sudo ./configure --with-fpic 
+        cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
+        sudo cp -f config/air_ci.cfg config/air.cfg
+        sudo make CACHE=Y -j ${job_number} -C lib
+        sudo mkdir bin
 
     - name: Download POS Binaries
       uses: actions/download-artifact@v3
@@ -375,10 +415,10 @@ jobs:
         path: |
           ${{github.workspace}}/bin
 
-    - name: change mode bin
+    - name: change mode
       working-directory: ${{github.workspace}}
       run: |
-          chmod +x bin/*
+          sudo chmod -R +x bin
 
     - name: WBT Command Test
       working-directory: ${{github.workspace}}
