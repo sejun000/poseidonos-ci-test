@@ -55,7 +55,7 @@ jobs:
         sudo script/pkgdep.sh
         sudo ./configure --with-fpic 
         cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
-        sudo cp -f config/air_ci.cfg config/air.cfg
+        cd ${{github.workspace}}; sudo cp -f config/air_ci.cfg config/air.cfg
         sudo make CACHE=Y -j ${job_number} -C lib
         sudo mkdir bin
 
@@ -101,7 +101,7 @@ jobs:
         sudo script/pkgdep.sh
         sudo ./configure --with-fpic 
         cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
-        sudo cp -f config/air_ci.cfg config/air.cfg
+        cd ${{github.workspace}}; sudo cp -f config/air_ci.cfg config/air.cfg
         sudo make CACHE=Y -j ${job_number} -C lib
         sudo mkdir bin
 
@@ -159,7 +159,7 @@ jobs:
         sudo script/pkgdep.sh
         sudo ./configure --with-fpic 
         cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
-        sudo cp -f config/air_ci.cfg config/air.cfg
+        cd ${{github.workspace}}; sudo cp -f config/air_ci.cfg config/air.cfg
         sudo make CACHE=Y -j ${job_number} -C lib
         sudo mkdir bin
 
@@ -206,7 +206,7 @@ jobs:
         sudo script/pkgdep.sh
         sudo ./configure --with-fpic 
         cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
-        sudo cp -f config/air_ci.cfg config/air.cfg
+        cd ${{github.workspace}}; sudo cp -f config/air_ci.cfg config/air.cfg
         sudo make CACHE=Y -j ${job_number} -C lib
         sudo mkdir bin
 
@@ -253,7 +253,7 @@ jobs:
         sudo script/pkgdep.sh
         sudo ./configure --with-fpic 
         cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
-        sudo cp -f config/air_ci.cfg config/air.cfg
+        cd ${{github.workspace}}; sudo cp -f config/air_ci.cfg config/air.cfg
         sudo make CACHE=Y -j ${job_number} -C lib
         sudo mkdir bin
 
@@ -299,7 +299,7 @@ jobs:
         sudo script/pkgdep.sh
         sudo ./configure --with-fpic 
         cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
-        sudo cp -f config/air_ci.cfg config/air.cfg
+        cd ${{github.workspace}}; sudo cp -f config/air_ci.cfg config/air.cfg
         sudo make CACHE=Y -j ${job_number} -C lib
         sudo mkdir bin
 
@@ -358,7 +358,7 @@ jobs:
         sudo script/pkgdep.sh
         sudo ./configure --with-fpic 
         cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
-        sudo cp -f config/air_ci.cfg config/air.cfg
+        cd ${{github.workspace}}; sudo cp -f config/air_ci.cfg config/air.cfg
         sudo make CACHE=Y -j ${job_number} -C lib
         sudo mkdir bin
 
@@ -404,7 +404,7 @@ jobs:
         sudo script/pkgdep.sh
         sudo ./configure --with-fpic 
         cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
-        sudo cp -f config/air_ci.cfg config/air.cfg
+        cd ${{github.workspace}}; sudo cp -f config/air_ci.cfg config/air.cfg
         sudo make CACHE=Y -j ${job_number} -C lib
         sudo mkdir bin
 
