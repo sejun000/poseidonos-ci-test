@@ -75,8 +75,12 @@ jobs:
     - name: POS setup
       working-directory: ${{github.workspace}}
       run: |
-          sudo make install
-          sudo make udev_install
+          sudo cp ./config/telemetry_default.yaml /etc/pos/telemetry_default.yaml;
+          sudo install -m 755 bin/poseidonos /usr/local/bin
+          sudo install -m 755 bin/poseidonos-cli /usr/local/bin
+          sudo tool/udev/generate_udev_rule.sh
+          sudo cp tool/udev/99-custom-nvme.rules /etc/udev/rules.d/99-custom-nvme.rules;
+          sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
           sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
           sudo rmmod nvme_tcp
@@ -136,8 +140,12 @@ jobs:
     - name: POS setup
       working-directory: ${{github.workspace}}
       run: |
-          sudo make install
-          sudo make udev_install
+          sudo cp ./config/telemetry_default.yaml /etc/pos/telemetry_default.yaml;
+          sudo install -m 755 bin/poseidonos /usr/local/bin
+          sudo install -m 755 bin/poseidonos-cli /usr/local/bin
+          sudo tool/udev/generate_udev_rule.sh
+          sudo cp tool/udev/99-custom-nvme.rules /etc/udev/rules.d/99-custom-nvme.rules;
+          sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
           sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
           sudo rmmod nvme_tcp
@@ -209,8 +217,12 @@ jobs:
     - name: POS setup
       working-directory: ${{github.workspace}}
       run: |
-          sudo make install
-          sudo make udev_install
+          sudo cp ./config/telemetry_default.yaml /etc/pos/telemetry_default.yaml;
+          sudo install -m 755 bin/poseidonos /usr/local/bin
+          sudo install -m 755 bin/poseidonos-cli /usr/local/bin
+          sudo tool/udev/generate_udev_rule.sh
+          sudo cp tool/udev/99-custom-nvme.rules /etc/udev/rules.d/99-custom-nvme.rules;
+          sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
           sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
           sudo rmmod nvme_tcp
@@ -271,8 +283,12 @@ jobs:
     - name: POS setup
       working-directory: ${{github.workspace}}
       run: |
-          sudo make install
-          sudo make udev_install
+          sudo cp ./config/telemetry_default.yaml /etc/pos/telemetry_default.yaml;
+          sudo install -m 755 bin/poseidonos /usr/local/bin
+          sudo install -m 755 bin/poseidonos-cli /usr/local/bin
+          sudo tool/udev/generate_udev_rule.sh
+          sudo cp tool/udev/99-custom-nvme.rules /etc/udev/rules.d/99-custom-nvme.rules;
+          sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
           sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
           sudo rmmod nvme_tcp
@@ -333,8 +349,12 @@ jobs:
     - name: POS setup
       working-directory: ${{github.workspace}}
       run: |
-          sudo make install
-          sudo make udev_install
+          sudo cp ./config/telemetry_default.yaml /etc/pos/telemetry_default.yaml;
+          sudo install -m 755 bin/poseidonos /usr/local/bin
+          sudo install -m 755 bin/poseidonos-cli /usr/local/bin
+          sudo tool/udev/generate_udev_rule.sh
+          sudo cp tool/udev/99-custom-nvme.rules /etc/udev/rules.d/99-custom-nvme.rules;
+          sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
           sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
           sudo rmmod nvme_tcp
@@ -394,8 +414,12 @@ jobs:
     - name: POS setup
       working-directory: ${{github.workspace}}
       run: |
-          sudo make install
-          sudo make udev_install
+          sudo cp ./config/telemetry_default.yaml /etc/pos/telemetry_default.yaml;
+          sudo install -m 755 bin/poseidonos /usr/local/bin
+          sudo install -m 755 bin/poseidonos-cli /usr/local/bin
+          sudo tool/udev/generate_udev_rule.sh
+          sudo cp tool/udev/99-custom-nvme.rules /etc/udev/rules.d/99-custom-nvme.rules;
+          sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
           sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
           sudo rmmod nvme_tcp
@@ -468,8 +492,12 @@ jobs:
     - name: POS setup
       working-directory: ${{github.workspace}}
       run: |
-          sudo make install
-          sudo make udev_install
+          sudo cp ./config/telemetry_default.yaml /etc/pos/telemetry_default.yaml;
+          sudo install -m 755 bin/poseidonos /usr/local/bin
+          sudo install -m 755 bin/poseidonos-cli /usr/local/bin
+          sudo tool/udev/generate_udev_rule.sh
+          sudo cp tool/udev/99-custom-nvme.rules /etc/udev/rules.d/99-custom-nvme.rules;
+          sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
           sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
           sudo rmmod nvme_tcp
@@ -529,8 +557,12 @@ jobs:
     - name: POS setup
       working-directory: ${{github.workspace}}
       run: |
-          sudo make install
-          sudo make udev_install
+          sudo cp ./config/telemetry_default.yaml /etc/pos/telemetry_default.yaml;
+          sudo install -m 755 bin/poseidonos /usr/local/bin
+          sudo install -m 755 bin/poseidonos-cli /usr/local/bin
+          sudo tool/udev/generate_udev_rule.sh
+          sudo cp tool/udev/99-custom-nvme.rules /etc/udev/rules.d/99-custom-nvme.rules;
+          sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
           sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
           sudo rmmod nvme_tcp
