@@ -2,6 +2,9 @@
 name: C-Precommit_VM_Test
 
 on:
+  push:
+    branches: [ AWIBOF-5983-github-workflow-build ]
+
   pull_request:
     branches: [ main ]
 
@@ -600,7 +603,7 @@ jobs:
           sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
           sudo cp config/pos_for_aws.conf /etc/pos/pos.conf
-          
+
     - name: mod setup
       continue-on-error: true
       working-directory: ${{github.workspace}}
