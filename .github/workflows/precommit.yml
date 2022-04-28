@@ -83,6 +83,11 @@ jobs:
           sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
           sudo cp config/pos_for_aws.conf /etc/pos/pos.conf
+
+    - name: mod setup
+      continue-on-error: true
+      working-directory: ${{github.workspace}}
+      run: |
           sudo rmmod nvme_tcp
           sudo rmmod nvme_rdma
           sudo rmmod nvme_fabrics
@@ -148,6 +153,11 @@ jobs:
           sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
           sudo cp config/pos_for_aws.conf /etc/pos/pos.conf
+
+    - name: mod setup
+      continue-on-error: true
+      working-directory: ${{github.workspace}}
+      run: |
           sudo rmmod nvme_tcp
           sudo rmmod nvme_rdma
           sudo rmmod nvme_fabrics
@@ -225,6 +235,11 @@ jobs:
           sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
           sudo cp config/pos_for_aws.conf /etc/pos/pos.conf
+
+    - name: mod setup
+      continue-on-error: true
+      working-directory: ${{github.workspace}}
+      run: |
           sudo rmmod nvme_tcp
           sudo rmmod nvme_rdma
           sudo rmmod nvme_fabrics
@@ -291,6 +306,11 @@ jobs:
           sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
           sudo cp config/pos_for_aws.conf /etc/pos/pos.conf
+
+    - name: mod setup
+      continue-on-error: true
+      working-directory: ${{github.workspace}}
+      run: |
           sudo rmmod nvme_tcp
           sudo rmmod nvme_rdma
           sudo rmmod nvme_fabrics
@@ -357,6 +377,11 @@ jobs:
           sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
           sudo cp config/pos_for_aws.conf /etc/pos/pos.conf
+
+    - name: mod setup
+      continue-on-error: true
+      working-directory: ${{github.workspace}}
+      run: |
           sudo rmmod nvme_tcp
           sudo rmmod nvme_rdma
           sudo rmmod nvme_fabrics
@@ -422,6 +447,11 @@ jobs:
           sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
           sudo cp config/pos_for_aws.conf /etc/pos/pos.conf
+          
+    - name: mod setup
+      continue-on-error: true
+      working-directory: ${{github.workspace}}
+      run: |
           sudo rmmod nvme_tcp
           sudo rmmod nvme_rdma
           sudo rmmod nvme_fabrics
@@ -500,6 +530,11 @@ jobs:
           sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
           sudo cp config/pos_for_aws.conf /etc/pos/pos.conf
+
+    - name: mod setup
+      continue-on-error: true
+      working-directory: ${{github.workspace}}
+      run: |
           sudo rmmod nvme_tcp
           sudo rmmod nvme_rdma
           sudo rmmod nvme_fabrics
@@ -565,6 +600,11 @@ jobs:
           sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
           sudo cp config/pos_for_aws.conf /etc/pos/pos.conf
+          
+    - name: mod setup
+      continue-on-error: true
+      working-directory: ${{github.workspace}}
+      run: |
           sudo rmmod nvme_tcp
           sudo rmmod nvme_rdma
           sudo rmmod nvme_fabrics
