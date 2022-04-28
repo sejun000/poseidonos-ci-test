@@ -15,7 +15,7 @@ on:
           description: 'Test scenario tags'
 
 jobs:
-  IO_Exception_Test:
+  Build:
     runs-on: VM
     steps:
     
@@ -25,10 +25,66 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Build Setup
+      id: build_id
       working-directory: ${{github.workspace}}
       run: | 
         chmod +x .github/workflows/script/build_setup.sh
         .github/workflows/script/build_setup.sh -r ${{github.sha}} -d ${{github.workspace}} -c --with-fpic 
+    
+    - name: Upload POS Binaries
+      if: ${{ steps.build_id.outcome == 'success' }} 
+      uses: actions/upload-artifact@v3
+      with:
+        name: POS-Binaries
+        path: |
+          ${{github.workspace}}/bin
+
+  IO_Exception_Test:
+    needs: Build
+    runs-on: VM
+    steps:
+    
+    - run: |
+        sudo chown -R $USER:$USER $GITHUB_WORKSPACE
+
+    - uses: actions/checkout@v2
+
+    - name: Test Setup
+      working-directory: ${{github.workspace}}
+      run: | 
+        sudo script/pkgdep.sh
+        sudo ./configure --with-fpic 
+        cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
+        cd ${{github.workspace}}; sudo cp -f config/air_ci.cfg config/air.cfg
+        sudo make CACHE=Y -j ${job_number} -C lib
+        sudo mkdir bin
+        sudo mkdir tool/cli/docs/manpage
+
+    - name: Download POS Binaries
+      uses: actions/download-artifact@v3
+      with:
+        name: POS-Binaries
+        path: |
+          ${{github.workspace}}/bin
+
+    - name: change mode
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo chmod -R +x bin
+
+    - name: POS setup
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo make install
+          sudo make udev_install
+          sudo ./script/setup_env.sh
+          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo rmmod nvme_tcp
+          sudo rmmod nvme_rdma
+          sudo rmmod nvme_fabrics
+          sudo modprobe nvme_tcp
+          sudo modprobe nvme_rdma
+          sudo modprobe nvme_fabrics
 
     - name: IO + Exception Simple
       working-directory: ${{github.workspace}}
@@ -45,6 +101,7 @@ jobs:
           /var/log/pos
 
   Normal_IO_NPOR_SPOR_Test:
+    needs: Build
     runs-on: VM
     steps:
 
@@ -53,12 +110,43 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - name: Build Setup
+    - name: Test Setup
       working-directory: ${{github.workspace}}
       run: | 
-        chmod +x .github/workflows/script/build_setup.sh
-        .github/workflows/script/build_setup.sh -r ${{github.sha}} -d ${{github.workspace}} -c --with-fpic
-    
+        sudo script/pkgdep.sh
+        sudo ./configure --with-fpic 
+        cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
+        cd ${{github.workspace}}; sudo cp -f config/air_ci.cfg config/air.cfg
+        sudo make CACHE=Y -j ${job_number} -C lib
+        sudo mkdir bin
+        sudo mkdir tool/cli/docs/manpage
+
+    - name: Download POS Binaries
+      uses: actions/download-artifact@v3
+      with:
+        name: POS-Binaries
+        path: |
+          ${{github.workspace}}/bin
+
+    - name: change mode
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo chmod -R +x bin
+
+    - name: POS setup
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo make install
+          sudo make udev_install
+          sudo ./script/setup_env.sh
+          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo rmmod nvme_tcp
+          sudo rmmod nvme_rdma
+          sudo rmmod nvme_fabrics
+          sudo modprobe nvme_tcp
+          sudo modprobe nvme_rdma
+          sudo modprobe nvme_fabrics
+
     - name: Normal IO Test
       working-directory: ${{github.workspace}}
       run: |
@@ -86,6 +174,7 @@ jobs:
           /var/log/pos
 
   Rebuild_SPOR_test:
+    needs: Build
     runs-on: VM
     steps:
 
@@ -94,12 +183,43 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - name: Build Setup
+    - name: Test Setup
       working-directory: ${{github.workspace}}
       run: | 
-        chmod +x .github/workflows/script/build_setup.sh
-        .github/workflows/script/build_setup.sh -r ${{github.sha}} -d ${{github.workspace}} -c --with-fpic 
-    
+        sudo script/pkgdep.sh
+        sudo ./configure --with-fpic 
+        cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
+        cd ${{github.workspace}}; sudo cp -f config/air_ci.cfg config/air.cfg
+        sudo make CACHE=Y -j ${job_number} -C lib
+        sudo mkdir bin
+        sudo mkdir tool/cli/docs/manpage
+
+    - name: Download POS Binaries
+      uses: actions/download-artifact@v3
+      with:
+        name: POS-Binaries
+        path: |
+          ${{github.workspace}}/bin
+
+    - name: change mode
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo chmod -R +x bin
+
+    - name: POS setup
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo make install
+          sudo make udev_install
+          sudo ./script/setup_env.sh
+          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo rmmod nvme_tcp
+          sudo rmmod nvme_rdma
+          sudo rmmod nvme_fabrics
+          sudo modprobe nvme_tcp
+          sudo modprobe nvme_rdma
+          sudo modprobe nvme_fabrics
+
     - name: Rebuild SPOR Test
       working-directory: ${{github.workspace}}
       run: |
@@ -116,6 +236,7 @@ jobs:
 
 
   Rebuild_Test:
+    needs: Build
     runs-on: VM
     steps:
 
@@ -124,12 +245,43 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - name: Build Setup
+    - name: Test Setup
       working-directory: ${{github.workspace}}
       run: | 
-        chmod +x .github/workflows/script/build_setup.sh
-        .github/workflows/script/build_setup.sh -r ${{github.sha}} -d ${{github.workspace}} -c --with-fpic 
-    
+        sudo script/pkgdep.sh
+        sudo ./configure --with-fpic 
+        cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
+        cd ${{github.workspace}}; sudo cp -f config/air_ci.cfg config/air.cfg
+        sudo make CACHE=Y -j ${job_number} -C lib
+        sudo mkdir bin
+        sudo mkdir tool/cli/docs/manpage
+
+    - name: Download POS Binaries
+      uses: actions/download-artifact@v3
+      with:
+        name: POS-Binaries
+        path: |
+          ${{github.workspace}}/bin
+
+    - name: change mode
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo chmod -R +x bin
+
+    - name: POS setup
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo make install
+          sudo make udev_install
+          sudo ./script/setup_env.sh
+          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo rmmod nvme_tcp
+          sudo rmmod nvme_rdma
+          sudo rmmod nvme_fabrics
+          sudo modprobe nvme_tcp
+          sudo modprobe nvme_rdma
+          sudo modprobe nvme_fabrics
+
     - name: Rebuild Test 
       working-directory: ${{github.workspace}}
       run: |
@@ -146,6 +298,7 @@ jobs:
 
 
   Rotational_Rebuild_Test:
+    needs: Build
     runs-on: VM
     steps:
 
@@ -154,12 +307,43 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - name: Build Setup
+    - name: Test Setup
       working-directory: ${{github.workspace}}
       run: | 
-        chmod +x .github/workflows/script/build_setup.sh
-        .github/workflows/script/build_setup.sh -r ${{github.sha}} -d ${{github.workspace}} -c --with-fpic 
-    
+        sudo script/pkgdep.sh
+        sudo ./configure --with-fpic 
+        cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
+        cd ${{github.workspace}}; sudo cp -f config/air_ci.cfg config/air.cfg
+        sudo make CACHE=Y -j ${job_number} -C lib
+        sudo mkdir bin
+        sudo mkdir tool/cli/docs/manpage
+
+    - name: Download POS Binaries
+      uses: actions/download-artifact@v3
+      with:
+        name: POS-Binaries
+        path: |
+          ${{github.workspace}}/bin
+
+    - name: change mode
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo chmod -R +x bin
+
+    - name: POS setup
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo make install
+          sudo make udev_install
+          sudo ./script/setup_env.sh
+          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo rmmod nvme_tcp
+          sudo rmmod nvme_rdma
+          sudo rmmod nvme_fabrics
+          sudo modprobe nvme_tcp
+          sudo modprobe nvme_rdma
+          sudo modprobe nvme_fabrics
+
     - name: Rotational Rebuild Test
       working-directory: ${{github.workspace}}
       run: |
@@ -175,6 +359,7 @@ jobs:
           /var/log/pos
 
   Unit_Test:
+    needs: Build
     runs-on: VM
     steps:
 
@@ -183,12 +368,43 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - name: Build Setup
+    - name: Test Setup
       working-directory: ${{github.workspace}}
       run: | 
-        chmod +x .github/workflows/script/build_setup.sh
-        .github/workflows/script/build_setup.sh -r ${{github.sha}} -d ${{github.workspace}} -c --with-fpic
-         
+        sudo script/pkgdep.sh
+        sudo ./configure --with-fpic 
+        cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
+        cd ${{github.workspace}}; sudo cp -f config/air_ci.cfg config/air.cfg
+        sudo make CACHE=Y -j ${job_number} -C lib
+        sudo mkdir bin
+        sudo mkdir tool/cli/docs/manpage
+
+    - name: Download POS Binaries
+      uses: actions/download-artifact@v3
+      with:
+        name: POS-Binaries
+        path: |
+          ${{github.workspace}}/bin
+
+    - name: change mode
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo chmod -R +x bin
+
+    - name: POS setup
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo make install
+          sudo make udev_install
+          sudo ./script/setup_env.sh
+          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo rmmod nvme_tcp
+          sudo rmmod nvme_rdma
+          sudo rmmod nvme_fabrics
+          sudo modprobe nvme_tcp
+          sudo modprobe nvme_rdma
+          sudo modprobe nvme_fabrics
+
     # Need separation building from running
     - name: UT Build and Run
       working-directory: ${{github.workspace}}
@@ -217,6 +433,7 @@ jobs:
           /var/log/pos
 
   Volume_Test:
+    needs: Build
     runs-on: VM
     steps:
 
@@ -225,12 +442,43 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - name: Build Setup
+    - name: Test Setup
       working-directory: ${{github.workspace}}
       run: | 
-        chmod +x .github/workflows/script/build_setup.sh
-        .github/workflows/script/build_setup.sh -r ${{github.sha}} -d ${{github.workspace}} -c --with-fpic 
-    
+        sudo script/pkgdep.sh
+        sudo ./configure --with-fpic 
+        cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
+        cd ${{github.workspace}}; sudo cp -f config/air_ci.cfg config/air.cfg
+        sudo make CACHE=Y -j ${job_number} -C lib
+        sudo mkdir bin
+        sudo mkdir tool/cli/docs/manpage
+
+    - name: Download POS Binaries
+      uses: actions/download-artifact@v3
+      with:
+        name: POS-Binaries
+        path: |
+          ${{github.workspace}}/bin
+
+    - name: change mode
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo chmod -R +x bin
+
+    - name: POS setup
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo make install
+          sudo make udev_install
+          sudo ./script/setup_env.sh
+          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo rmmod nvme_tcp
+          sudo rmmod nvme_rdma
+          sudo rmmod nvme_fabrics
+          sudo modprobe nvme_tcp
+          sudo modprobe nvme_rdma
+          sudo modprobe nvme_fabrics
+
     - name: Volume Test
       working-directory: ${{github.workspace}}
       run: |
@@ -246,6 +494,7 @@ jobs:
           /var/log/pos
 
   WBT_IO_ST:
+    needs: Build
     runs-on: VM
     steps:
 
@@ -254,12 +503,43 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - name: Build Setup
+    - name: Test Setup
       working-directory: ${{github.workspace}}
       run: | 
-        chmod +x .github/workflows/script/build_setup.sh
-        .github/workflows/script/build_setup.sh -r ${{github.sha}} -d ${{github.workspace}} -c --with-fpic 
-    
+        sudo script/pkgdep.sh
+        sudo ./configure --with-fpic 
+        cd lib; sudo cmake . -DSPDK_DEBUG_ENABLE=n -DUSE_LOCAL_REPO=n
+        cd ${{github.workspace}}; sudo cp -f config/air_ci.cfg config/air.cfg
+        sudo make CACHE=Y -j ${job_number} -C lib
+        sudo mkdir bin
+        sudo mkdir tool/cli/docs/manpage
+
+    - name: Download POS Binaries
+      uses: actions/download-artifact@v3
+      with:
+        name: POS-Binaries
+        path: |
+          ${{github.workspace}}/bin
+
+    - name: change mode
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo chmod -R +x bin
+
+    - name: POS setup
+      working-directory: ${{github.workspace}}
+      run: |
+          sudo make install
+          sudo make udev_install
+          sudo ./script/setup_env.sh
+          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo rmmod nvme_tcp
+          sudo rmmod nvme_rdma
+          sudo rmmod nvme_fabrics
+          sudo modprobe nvme_tcp
+          sudo modprobe nvme_rdma
+          sudo modprobe nvme_fabrics
+
     - name: WBT Command Test
       working-directory: ${{github.workspace}}
       run: |
