@@ -82,7 +82,7 @@ jobs:
           sudo cp tool/udev/99-custom-nvme.rules /etc/udev/rules.d/99-custom-nvme.rules;
           sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
-          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo cp config/pos_for_aws.conf /etc/pos/pos.conf
           sudo rmmod nvme_tcp
           sudo rmmod nvme_rdma
           sudo rmmod nvme_fabrics
@@ -147,7 +147,7 @@ jobs:
           sudo cp tool/udev/99-custom-nvme.rules /etc/udev/rules.d/99-custom-nvme.rules;
           sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
-          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo cp config/pos_for_aws.conf /etc/pos/pos.conf
           sudo rmmod nvme_tcp
           sudo rmmod nvme_rdma
           sudo rmmod nvme_fabrics
@@ -224,7 +224,7 @@ jobs:
           sudo cp tool/udev/99-custom-nvme.rules /etc/udev/rules.d/99-custom-nvme.rules;
           sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
-          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo cp config/pos_for_aws.conf /etc/pos/pos.conf
           sudo rmmod nvme_tcp
           sudo rmmod nvme_rdma
           sudo rmmod nvme_fabrics
@@ -290,7 +290,7 @@ jobs:
           sudo cp tool/udev/99-custom-nvme.rules /etc/udev/rules.d/99-custom-nvme.rules;
           sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
-          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo cp config/pos_for_aws.conf /etc/pos/pos.conf
           sudo rmmod nvme_tcp
           sudo rmmod nvme_rdma
           sudo rmmod nvme_fabrics
@@ -356,7 +356,7 @@ jobs:
           sudo cp tool/udev/99-custom-nvme.rules /etc/udev/rules.d/99-custom-nvme.rules;
           sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
-          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo cp config/pos_for_aws.conf /etc/pos/pos.conf
           sudo rmmod nvme_tcp
           sudo rmmod nvme_rdma
           sudo rmmod nvme_fabrics
@@ -421,7 +421,7 @@ jobs:
           sudo cp tool/udev/99-custom-nvme.rules /etc/udev/rules.d/99-custom-nvme.rules;
           sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
-          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo cp config/pos_for_aws.conf /etc/pos/pos.conf
           sudo rmmod nvme_tcp
           sudo rmmod nvme_rdma
           sudo rmmod nvme_fabrics
@@ -499,7 +499,7 @@ jobs:
           sudo cp tool/udev/99-custom-nvme.rules /etc/udev/rules.d/99-custom-nvme.rules;
           sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
-          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo cp config/pos_for_aws.conf /etc/pos/pos.conf
           sudo rmmod nvme_tcp
           sudo rmmod nvme_rdma
           sudo rmmod nvme_fabrics
@@ -564,7 +564,7 @@ jobs:
           sudo cp tool/udev/99-custom-nvme.rules /etc/udev/rules.d/99-custom-nvme.rules;
           sudo udevadm control --reload-rules && udevadm trigger;
           sudo ./script/setup_env.sh
-          sudo cp config/ibofos_for_aws_vm_ci.conf /etc/pos/pos.conf
+          sudo cp config/pos_for_aws.conf /etc/pos/pos.conf
           sudo rmmod nvme_tcp
           sudo rmmod nvme_rdma
           sudo rmmod nvme_fabrics
