@@ -84,7 +84,7 @@ jobs:
         WORKFLOW_NAME: ${{ github.workflow }}
         RUN_NUMBER: ${{ github.run_number }}
         ACTOR: ${{ github.actor }}
-        SHA: ${{ github.sha }}
+        SHA_URL: https://github.com/poseidonos/poseidonos/commit/${{ github.sha }}
       with:
         assignees: ${{github.actor}} 
 
