@@ -1,0 +1,32 @@
+
+name: Package_Upload_Test
+
+jobs:
+  Upload_Package:
+    runs-on: VM
+    steps:
+    
+    - run: |
+        sudo chown -R $USER:$USER $GITHUB_WORKSPACE
+
+    - uses: actions/checkout@v2
+
+    - name: Build Setup
+      working-directory: ${{github.workspace}}
+      run: | 
+        chmod +x .github/workflows/script/build_setup.sh
+        .github/workflows/script/build_setup.sh -r ${{github.sha}} -d ${{github.workspace}} -c --with-fpic 
+
+    - name: package build
+      working-directory: ${{github.workspace}}
+      run: |
+        cd package
+        sudo make all -j8
+
+    - name: Package artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: PoseidonOS-Debian-package
+        path: |
+          ${{github.workspace}}/package/debian/poseidonos.deb
+
