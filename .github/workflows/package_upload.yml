@@ -33,8 +33,7 @@ jobs:
     - name: package build
       working-directory: ${{github.workspace}}
       run: |
-        cd package
-        sudo make -j8
+        sudo make package -j8
 
     - name: Package artifacts
       uses: actions/upload-artifact@v3
