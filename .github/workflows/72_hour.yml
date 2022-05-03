@@ -2,6 +2,9 @@
 name: M8-72H_VM_Test
 
 on:
+  push:
+    branches: [AWIBOF-5994-github-action-annotation-dashboard-link]
+
   schedule:
     - cron: '0 16 * * MON-FRI'
 
@@ -36,6 +39,7 @@ jobs:
     steps:
     
     - run: |
+        exit 1
         sudo chown -R $USER:$USER $GITHUB_WORKSPACE
 
     - uses: actions/checkout@v2
