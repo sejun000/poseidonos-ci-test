@@ -22,7 +22,7 @@ jobs:
     - run: |
         sudo chown -R $USER:$USER $GITHUB_WORKSPACE
 
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
 
     - name: Build Setup
       working-directory: ${{github.workspace}}
