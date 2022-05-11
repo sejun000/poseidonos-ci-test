@@ -4,7 +4,6 @@ name: Package_Upload_Test
 on:
   push:
     branches: [Package_Aritifact]
-
   workflow_dispatch:
     inputs:
        logLevel:
