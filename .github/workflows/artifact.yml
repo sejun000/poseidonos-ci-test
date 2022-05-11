@@ -37,12 +37,16 @@ jobs:
           ${{github.workspace}}/bin
 
   Test:
-    needs: [Build]
+    needs: Build
     strategy:
       matrix:
         region: [us-east-1, us-east-2, us-west-1, us-west-2]
     runs-on: ${{ matrix.region }}
     steps:        
+    - run: |
+        sudo chown -R $USER:$USER $GITHUB_WORKSPACE
+    - uses: actions/checkout@v2
+
     - name: Download POS Binaries
       uses: actions/download-artifact@v3
       with:
