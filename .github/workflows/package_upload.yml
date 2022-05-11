@@ -16,7 +16,7 @@ on:
 
 jobs:
   Upload_Package:
-    runs-on: ubuntu-18.04
+    runs-on: VM
     steps:
     
     - run: |
@@ -38,7 +38,7 @@ jobs:
     - name: Package artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: PoseidonOS-Debian-package
+        name: poseidonos.deb
         path: |
           ${{github.workspace}}/package/debian/poseidonos.deb
 
