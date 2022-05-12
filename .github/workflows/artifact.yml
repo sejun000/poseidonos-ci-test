@@ -23,13 +23,13 @@ jobs:
     - name: Upload POS Binaries
       uses: actions/upload-artifact@v3
       with:
-        name: POS-Binaries
+        name: POS-Binaries-${{ matrix.region }}
         path: |
           ${{github.workspace}}/bin
 
     - name: Download POS Binaries
       uses: actions/download-artifact@v3
       with:
-        name: POS-Binaries
+        name: POS-Binaries-${{ matrix.region }}
         path: |
           ${{github.workspace}}
