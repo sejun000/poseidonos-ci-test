@@ -14,42 +14,22 @@ on:
           description: 'Test scenario tags'
 
 jobs:
-  Build:
-    runs-on: test
-    steps:
-    - run: |
-        sudo chown -R $USER:$USER $GITHUB_WORKSPACE
-    - uses: actions/checkout@v2
-
-    - name: Build Setup
-      id: build_id
-      working-directory: ${{github.workspace}}
-      run: | 
-        chmod +x .github/workflows/script/build_setup.sh
-        .github/workflows/script/build_setup.sh -r ${{github.sha}} -d ${{github.workspace}} -c --with-fpic 
-    
+  Test:
+    strategy:
+      matrix:
+        region: [us-east-1, us-east-2, us-west-1, us-west-2, ap-northeast-1, ap-northeast-2]
+    runs-on: ${{ matrix.region }}
+    steps:        
     - name: Upload POS Binaries
-      if: ${{ steps.build_id.outcome == 'success' }} 
       uses: actions/upload-artifact@v3
       with:
         name: POS-Binaries
         path: |
           ${{github.workspace}}/bin
 
-  Test:
-    needs: Build
-    strategy:
-      matrix:
-        region: [us-east-1, us-east-2, us-west-1, us-west-2, ap-northeast-1, ap-northeast-2]
-    runs-on: ${{ matrix.region }}
-    steps:        
-    - run: |
-        sudo chown -R $USER:$USER $GITHUB_WORKSPACE
-    - uses: actions/checkout@v2
-
     - name: Download POS Binaries
       uses: actions/download-artifact@v3
       with:
         name: POS-Binaries
         path: |
-          ${{github.workspace}}/bin
+          ${{github.workspace}}
