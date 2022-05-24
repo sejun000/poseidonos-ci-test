@@ -32,6 +32,7 @@ jobs:
         .github/workflows/script/build_setup.sh -r ${{github.sha}} -d ${{github.workspace}} -c --with-fpic 
 
     - name: IO + Exception Simple
+      id: io_exception_simple
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/io_exception/io_exception.sh
@@ -44,6 +45,22 @@ jobs:
         name: IO_Exception_LOG
         path: |
           /var/log/pos
+
+    - name: Clean Backup After IO_Exception Test
+      if:  always() && steps.io_exception_simple.outcome == 'failure'
+      working-directory: ${{github.workspace}}
+      run: |
+        chmod +x .github/workflows/script/clean_backup.sh
+        .github/workflows/script/clean_backup.sh -i 127.0.0.1 -p "C-Precommit_VM_Test" -n "IO_Exception" -r ${{github.sha}} -d ${{github.workspace}}
+
+    - name: Upload POS Core Dump
+      if:  always() && steps.io_exception_simple.outcome == 'failure'
+      uses: actions/upload-artifact@v3
+      with:
+        name: IO_Exception_CORE_DUMP
+        path: |
+          ${{github.workspace}}/tool/dump/*.tar.gz*
+
 
   Normal_IO_NPOR_SPOR_Test:
     runs-on: VM
@@ -62,18 +79,21 @@ jobs:
         .github/workflows/script/build_setup.sh -r ${{github.sha}} -d ${{github.workspace}} -c --with-fpic
     
     - name: Normal IO Test
+      id: normal_io_test
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/normal_io_npor_spor/normal_io.sh
         .github/workflows/script/normal_io_npor_spor/normal_io.sh ${{github.workspace}}
 
     - name: NPOR Test
+      id: npor_test
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/normal_io_npor_spor/npor.sh
         .github/workflows/script/normal_io_npor_spor/npor.sh ${{github.workspace}}
 
     - name: SPOR Test
+      id: spor_test
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/normal_io_npor_spor/spor_precommit.sh
@@ -86,6 +106,21 @@ jobs:
         name: Normal_IO_NPOR_SPOR_LOG
         path: |
           /var/log/pos
+
+    - name: Clean Backup After Normal_IO_NPOR_SPOR Test
+      if: always() && (steps.normal_io_test.outcome == 'failure' || steps.npor_test.outcome == 'failure' || steps.spor_test.outcome == 'failure')
+      working-directory: ${{github.workspace}}
+      run: |
+        chmod +x .github/workflows/script/clean_backup.sh
+        .github/workflows/script/clean_backup.sh -i 127.0.0.1 -p "C-Precommit_VM_Test" -n "Normal_IO_NPOR_SPOR" -r ${{github.sha}} -d ${{github.workspace}}
+
+    - name: Upload POS Core Dump
+      if: always() && (steps.normal_io_test.outcome == 'failure' || steps.npor_test.outcome == 'failure' || steps.spor_test.outcome == 'failure')
+      uses: actions/upload-artifact@v3
+      with:
+        name: Normal_IO_NPOR_SPOR_CORE_DUMP
+        path: |
+          ${{github.workspace}}/tool/dump/*.tar.gz*
 
   Rebuild_SPOR_test:
     runs-on: VM
@@ -104,6 +139,7 @@ jobs:
         .github/workflows/script/build_setup.sh -r ${{github.sha}} -d ${{github.workspace}} -c --with-fpic 
     
     - name: Rebuild SPOR Test
+      id: rebuild_spor_test
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/rebuild_spor/rebuild_spor.sh
@@ -116,6 +152,21 @@ jobs:
         name: Rebuild_SPOR_LOG
         path: |
           /var/log/pos
+
+    - name: Clean Backup After Rebuild_SPOR Test
+      if: always() && steps.rebuild_spor_test.outcome == 'failure'
+      working-directory: ${{github.workspace}}
+      run: |
+        chmod +x .github/workflows/script/clean_backup.sh
+        .github/workflows/script/clean_backup.sh -i 127.0.0.1 -p "C-Precommit_VM_Test" -n "rebuild_spor" -r ${{github.sha}} -d ${{github.workspace}}
+
+    - name: Upload POS Core Dump
+      if: always() && steps.rebuild_spor_test.outcome == 'failure'
+      uses: actions/upload-artifact@v3
+      with:
+        name: Rebuild_SPOR_CORE_DUMP
+        path: |
+          ${{github.workspace}}/tool/dump/*.tar.gz*
 
 
   Rebuild_Test:
@@ -135,6 +186,7 @@ jobs:
         .github/workflows/script/build_setup.sh -r ${{github.sha}} -d ${{github.workspace}} -c --with-fpic 
     
     - name: Rebuild Test 
+      id: rebuild_test
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/rebuild/rebuild.sh
@@ -148,6 +200,20 @@ jobs:
         path: |
           /var/log/pos
 
+    - name: Clean Backup After Rebuild Test
+      if: always() && steps.rebuild_test.outcome == 'failure'
+      working-directory: ${{github.workspace}}
+      run: |
+        chmod +x .github/workflows/script/clean_backup.sh
+        .github/workflows/script/clean_backup.sh -i 127.0.0.1 -p "C-Precommit_VM_Test" -n "rebuild" -r ${{github.sha}} -d ${{github.workspace}}
+
+    - name: Upload POS Core Dump
+      if: always() && steps.rebuild_test.outcome == 'failure'
+      uses: actions/upload-artifact@v3
+      with:
+        name: Rebuild_CORE_DUMP
+        path: |
+          ${{github.workspace}}/tool/dump/*.tar.gz*
 
   Rotational_Rebuild_Test:
     runs-on: VM
@@ -166,6 +232,7 @@ jobs:
         .github/workflows/script/build_setup.sh -r ${{github.sha}} -d ${{github.workspace}} -c --with-fpic 
     
     - name: Rotational Rebuild Test
+      id: rotational_rebuild_test
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/rotational_rebuild/rotational_rebuild.sh
@@ -178,6 +245,22 @@ jobs:
         name: Rotational_Rebuild_LOG
         path: |
           /var/log/pos
+
+    - name: Clean Backup After Rotational_Rebuild Test
+      if: always() && steps.rotational_rebuild_test.outcome == 'failure'
+      working-directory: ${{github.workspace}}
+      run: |
+        chmod +x .github/workflows/script/clean_backup.sh
+        .github/workflows/script/clean_backup.sh -i 127.0.0.1 -p "C-Precommit_VM_Test" -n "rotational_rebuild" -r ${{github.sha}} -d ${{github.workspace}}
+
+    - name: Upload POS Core Dump
+      if: always() && steps.rotational_rebuild_test.outcome == 'failure'
+      uses: actions/upload-artifact@v3
+      with:
+        name: Rotational_Rebuild_CORE_DUMP
+        path: |
+          ${{github.workspace}}/tool/dump/*.tar.gz*
+
 
   Unit_Test:
     runs-on: VM
@@ -239,6 +322,7 @@ jobs:
         .github/workflows/script/build_setup.sh -r ${{github.sha}} -d ${{github.workspace}} -c --with-fpic 
     
     - name: Volume Test
+      id: volume_test
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/volume/volume.sh
@@ -251,6 +335,22 @@ jobs:
         name: Volume_LOG
         path: |
           /var/log/pos
+
+    - name: Clean Backup After Volume Test
+      if: always() && steps.volume_test.outcome == 'failure'
+      working-directory: ${{github.workspace}}
+      run: |
+        chmod +x .github/workflows/script/clean_backup.sh
+        .github/workflows/script/clean_backup.sh -i 127.0.0.1 -p "C-Precommit_VM_Test" -n "volume" -r ${{github.sha}} -d ${{github.workspace}}
+
+    - name: Upload POS Core Dump
+      if: always() && steps.volume_test.outcome == 'failure'
+      uses: actions/upload-artifact@v3
+      with:
+        name: Volume_CORE_DUMP
+        path: |
+          ${{github.workspace}}/tool/dump/*.tar.gz*
+
 
   WBT_IO_ST:
     runs-on: VM
@@ -269,12 +369,14 @@ jobs:
         .github/workflows/script/build_setup.sh -r ${{github.sha}} -d ${{github.workspace}} -c --with-fpic 
     
     - name: WBT Command Test
+      id: wbt_command_test
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/wb_io_st/wbt_command_pre.sh
         .github/workflows/script/wb_io_st/wbt_command_pre.sh ${{github.workspace}} 
 
     - name: IO System Level Test
+      id: io_system_level_test
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/wb_io_st/io_system_level.sh
@@ -287,3 +389,4 @@ jobs:
         name: WBT_IO_ST_LOG
         path: |
           /var/log/pos
+
