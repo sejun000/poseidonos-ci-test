@@ -62,14 +62,14 @@ jobs:
           /var/log/pos
 
     - name: Clean Backup After Volume Test
-      if: always() && steps.volume_test.outcome == 'failure'
+      if: always() && steps.volume_test.outcome != 'success'
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/clean_backup.sh
         .github/workflows/script/clean_backup.sh -i 127.0.0.1 -p "M1-PostVM_Test" -n "volume" -r ${{github.sha}} -d ${{github.workspace}}
 
     - name: Upload POS Core Dump
-      if: always() && steps.volume_test.outcome == 'failure'
+      if: always() && steps.volume_test.outcome != 'success'
       uses: actions/upload-artifact@v3
       with:
         name: VOLUME_TEST_CORE_DUMP
@@ -109,14 +109,14 @@ jobs:
           /var/log/pos
 
     - name: Clean Backup After Normal IO
-      if: always() && steps.normal_io_test.outcome == 'failure'
+      if: always() && steps.normal_io_test.outcome != 'success'
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/clean_backup.sh
         .github/workflows/script/clean_backup.sh -i 127.0.0.1 -p "M1-PostVM_Test" -n "normal_io" -r ${{github.sha}} -d ${{github.workspace}}
 
     - name: Upload POS Core Dump
-      if: always() && steps.normal_io_test.outcome == 'failure'
+      if: always() && steps.normal_io_test.outcome != 'success'
       uses: actions/upload-artifact@v3
       with:
         name: NORMAL_IO_CORE_DUMP
@@ -155,14 +155,14 @@ jobs:
           /var/log/pos
 
     - name: Clean Backup After Npor Test
-      if: always() && steps.npor_test.outcome == 'failure'
+      if: always() && steps.npor_test.outcome != 'success'
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/clean_backup.sh
         .github/workflows/script/clean_backup.sh -i 127.0.0.1 -p "M1-PostVM_Test" -n "npor" -r ${{github.sha}} -d ${{github.workspace}}
 
     - name: Upload POS Core Dump
-      if: always() && steps.npor_test.outcome == 'failure'
+      if: always() && steps.npor_test.outcome != 'success'
       uses: actions/upload-artifact@v3
       with:
         name: NPOR_CORE_DUMP
@@ -201,14 +201,14 @@ jobs:
           /var/log/pos
 
     - name: Clean Backup After Fault Tolerance Test
-      if: always() && steps.rebuild_test.outcome == 'failure'
+      if: always() && steps.rebuild_test.outcome != 'success'
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/clean_backup.sh
         .github/workflows/script/clean_backup.sh -i 127.0.0.1 -p "M1-PostVM_Test" -n "rebuild" -r ${{github.sha}} -d ${{github.workspace}}
 
     - name: Upload POS Core Dump
-      if: always() && steps.rebuild_test.outcome == 'failure'
+      if: always() && steps.rebuild_test.outcome != 'success'
       uses: actions/upload-artifact@v3
       with:
         name: REBUILD_CORE_DUMP
@@ -247,14 +247,14 @@ jobs:
           /var/log/pos
 
     - name: Clean Backup After SPOR Test
-      if: always() && steps.spor_test.outcome == 'failure'
+      if: always() && steps.spor_test.outcome != 'success'
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/clean_backup.sh
         .github/workflows/script/clean_backup.sh -i 127.0.0.1 -p "M1-PostVM_Test" -n "spor" -r ${{github.sha}} -d ${{github.workspace}}
 
     - name: Upload POS Core Dump
-      if: always() && steps.spor_test.outcome == 'failure'
+      if: always() && steps.spor_test.outcome != 'success'
       uses: actions/upload-artifact@v3
       with:
         name: SPOR_CORE_DUMP
@@ -293,14 +293,14 @@ jobs:
           /var/log/pos
 
     - name: Clean Backup After IO_Intensive_Unmount Test
-      if: always() && steps.io_intensive_unmount_volume_array.outcome == 'failure'
+      if: always() && steps.io_intensive_unmount_volume_array.outcome != 'success'
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/clean_backup.sh
         .github/workflows/script/clean_backup.sh -i 127.0.0.1 -p "M1-PostVM_Test" -n "IO_Intensive_Unmount" -r ${{github.sha}} -d ${{github.workspace}}
 
     - name: Upload POS Core Dump
-      if: always() && steps.io_intensive_unmount_volume_array.outcome == 'failure'
+      if: always() && steps.io_intensive_unmount_volume_array.outcome != 'success'
       uses: actions/upload-artifact@v3
       with:
         name: IO_INTENSIVE_UNMOUNT_CORE_DUMP
@@ -339,14 +339,14 @@ jobs:
           /var/log/pos
 
     - name: Clean Backup After IO_Intensive_Detach Test
-      if: always() && steps.io_intensive_detach.outcome == 'failure'
+      if: always() && steps.io_intensive_detach.outcome != 'success'
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/clean_backup.sh
         .github/workflows/script/clean_backup.sh -i 127.0.0.1 -p "M1-PostVM_Test" -n "IO_Intensive_Detach" -r ${{github.sha}} -d ${{github.workspace}}
 
     - name: Upload POS Core Dump
-      if: always() && steps.io_intensive_detach.outcome == 'failure'
+      if: always() && steps.io_intensive_detach.outcome != 'success'
       uses: actions/upload-artifact@v3
       with:
         name: IO_INTENSIVE_DETACH_CORE_DUMP

@@ -47,14 +47,14 @@ jobs:
           /var/log/pos
 
     - name: Clean Backup After IO_Exception Test
-      if:  always() && steps.io_exception_simple.outcome == 'failure'
+      if:  always() && steps.io_exception_simple.outcome != 'success'
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/clean_backup.sh
         .github/workflows/script/clean_backup.sh -i 127.0.0.1 -p "C-Precommit_VM_Test" -n "IO_Exception" -r ${{github.sha}} -d ${{github.workspace}}
 
     - name: Upload POS Core Dump
-      if:  always() && steps.io_exception_simple.outcome == 'failure'
+      if:  always() && steps.io_exception_simple.outcome != 'success'
       uses: actions/upload-artifact@v3
       with:
         name: IO_Exception_CORE_DUMP
@@ -108,14 +108,14 @@ jobs:
           /var/log/pos
 
     - name: Clean Backup After Normal_IO_NPOR_SPOR Test
-      if: always() && (steps.normal_io_test.outcome == 'failure' || steps.npor_test.outcome == 'failure' || steps.spor_test.outcome == 'failure')
+      if: always() && (steps.normal_io_test.outcome != 'success' || steps.npor_test.outcome != 'success' || steps.spor_test.outcome != 'success')
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/clean_backup.sh
         .github/workflows/script/clean_backup.sh -i 127.0.0.1 -p "C-Precommit_VM_Test" -n "Normal_IO_NPOR_SPOR" -r ${{github.sha}} -d ${{github.workspace}}
 
     - name: Upload POS Core Dump
-      if: always() && (steps.normal_io_test.outcome == 'failure' || steps.npor_test.outcome == 'failure' || steps.spor_test.outcome == 'failure')
+      if: always() && (steps.normal_io_test.outcome != 'success' || steps.npor_test.outcome != 'success' || steps.spor_test.outcome != 'success')
       uses: actions/upload-artifact@v3
       with:
         name: Normal_IO_NPOR_SPOR_CORE_DUMP
@@ -154,14 +154,14 @@ jobs:
           /var/log/pos
 
     - name: Clean Backup After Rebuild_SPOR Test
-      if: always() && steps.rebuild_spor_test.outcome == 'failure'
+      if: always() && steps.rebuild_spor_test.outcome != 'success'
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/clean_backup.sh
         .github/workflows/script/clean_backup.sh -i 127.0.0.1 -p "C-Precommit_VM_Test" -n "rebuild_spor" -r ${{github.sha}} -d ${{github.workspace}}
 
     - name: Upload POS Core Dump
-      if: always() && steps.rebuild_spor_test.outcome == 'failure'
+      if: always() && steps.rebuild_spor_test.outcome != 'success'
       uses: actions/upload-artifact@v3
       with:
         name: Rebuild_SPOR_CORE_DUMP
@@ -201,14 +201,14 @@ jobs:
           /var/log/pos
 
     - name: Clean Backup After Rebuild Test
-      if: always() && steps.rebuild_test.outcome == 'failure'
+      if: always() && steps.rebuild_test.outcome != 'success'
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/clean_backup.sh
         .github/workflows/script/clean_backup.sh -i 127.0.0.1 -p "C-Precommit_VM_Test" -n "rebuild" -r ${{github.sha}} -d ${{github.workspace}}
 
     - name: Upload POS Core Dump
-      if: always() && steps.rebuild_test.outcome == 'failure'
+      if: always() && steps.rebuild_test.outcome != 'success'
       uses: actions/upload-artifact@v3
       with:
         name: Rebuild_CORE_DUMP
@@ -247,14 +247,14 @@ jobs:
           /var/log/pos
 
     - name: Clean Backup After Rotational_Rebuild Test
-      if: always() && steps.rotational_rebuild_test.outcome == 'failure'
+      if: always() && steps.rotational_rebuild_test.outcome != 'success'
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/clean_backup.sh
         .github/workflows/script/clean_backup.sh -i 127.0.0.1 -p "C-Precommit_VM_Test" -n "rotational_rebuild" -r ${{github.sha}} -d ${{github.workspace}}
 
     - name: Upload POS Core Dump
-      if: always() && steps.rotational_rebuild_test.outcome == 'failure'
+      if: always() && steps.rotational_rebuild_test.outcome != 'success'
       uses: actions/upload-artifact@v3
       with:
         name: Rotational_Rebuild_CORE_DUMP
@@ -337,14 +337,14 @@ jobs:
           /var/log/pos
 
     - name: Clean Backup After Volume Test
-      if: always() && steps.volume_test.outcome == 'failure'
+      if: always() && steps.volume_test.outcome != 'success'
       working-directory: ${{github.workspace}}
       run: |
         chmod +x .github/workflows/script/clean_backup.sh
         .github/workflows/script/clean_backup.sh -i 127.0.0.1 -p "C-Precommit_VM_Test" -n "volume" -r ${{github.sha}} -d ${{github.workspace}}
 
     - name: Upload POS Core Dump
-      if: always() && steps.volume_test.outcome == 'failure'
+      if: always() && steps.volume_test.outcome != 'success'
       uses: actions/upload-artifact@v3
       with:
         name: Volume_CORE_DUMP
