@@ -3,7 +3,8 @@ name: M4-Coverage_VM_Test
 
 on:
   push:
-    - AWIBOF-*
+    branches:
+      - AWIBOF-*
 
   schedule:
     - cron: '0 4-21/3 * * MON-FRI'
