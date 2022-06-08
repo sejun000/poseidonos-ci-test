@@ -2,6 +2,9 @@
 name: M4-Coverage_VM_Test
 
 on:
+  push:
+    - AWIBOF-*
+
   schedule:
     - cron: '0 4-21/3 * * MON-FRI'
 
@@ -29,7 +32,7 @@ jobs:
       if: ${{ github.event_name == 'schedule' }}
       working-directory: ${{github.workspace}}
       run: 
-        date=`date -d "-3 hours" "+%s"`; result=`git rev-list -1 --after=$date main`
+        date=`date -d "-23 hours" "+%s"`; result=`git rev-list -1 --after=$date main`
         test -z $result && echo "::set-output name=should_run::false"
   
   Prepare_Dashboard_Link:
