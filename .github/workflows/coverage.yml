@@ -23,7 +23,7 @@ jobs:
     steps:
     - run: |
         sudo chown -R $USER:$USER $GITHUB_WORKSPACE
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
     - id: should_run
       name: check latest commit is less than 3 hours
       if: ${{ github.event_name == 'schedule' }}
@@ -189,3 +189,13 @@ jobs:
         name: Coverage_LOG
         path: |
           /var/log/pos
+
+
+    - name: Upload Code Coverage Result
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: GcovResult
+        path: |
+          ${{github.workspace}}/GcovResult
+          ${{github.workspace}}/GcovResult-UT
