@@ -46,7 +46,7 @@ runs:
         AMP_SIGV4_ACCESS_KEY: ${{ inputs.AMP_SIGV4_ACCESS_KEY }}
         AMP_SIGV4_SECRET_KEY: ${{ inputs.AMP_SIGV4_SECRET_KEY }}
       run: |
-        cat>${PROMETHEUS_CONF_PATH}<<\
+        cat << $(cat << EOF\
 scrape_configs:\
   - job_name: "Github-Action"\
     scrape_interval: 1s\
@@ -62,3 +62,4 @@ remote_write:\
       region: ${ AMP_SIGV4_REGION }\
       access_key: ${ AMP_SIGV4_ACCESS_KEY }\
       secret_key: ${ AMP_SIGV4_SECRET_KEY }
+EOF)
