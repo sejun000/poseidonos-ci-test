@@ -33,6 +33,8 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - run: echo ${{ secrets.LOGSTASH_PORT }}
+
     - name: "Clean up pos-exporter"
       run: pkill -9 pos-exporter
       shell: bash
