@@ -46,7 +46,7 @@ runs:
         AMP_SIGV4_ACCESS_KEY: ${{ inputs.AMP_SIGV4_ACCESS_KEY }}
         AMP_SIGV4_SECRET_KEY: ${{ inputs.AMP_SIGV4_SECRET_KEY }}
       run: |
-        cat << $(cat << EOF\
+        cat << $(cat<<-EOF\
 scrape_configs:\
   - job_name: "Github-Action"\
     scrape_interval: 1s\
