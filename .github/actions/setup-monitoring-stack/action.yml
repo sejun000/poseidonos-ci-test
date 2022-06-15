@@ -76,3 +76,6 @@ remote_write:
       access_key: ${ AMP_SIGV4_ACCESS_KEY }
       secret_key: ${ AMP_SIGV4_SECRET_KEY }
 EOF
+
+  - run: echo "123"
+    shell: bash
