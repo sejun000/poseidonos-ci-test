@@ -46,7 +46,7 @@ runs:
         AMP_SIGV4_ACCESS_KEY: ${{ inputs.AMP_SIGV4_ACCESS_KEY }}
         AMP_SIGV4_SECRET_KEY: ${{ inputs.AMP_SIGV4_SECRET_KEY }}
       run: |
-        echo >> ${PROMETHEUS_CONF_PATH} < "scrape_configs:"
-        echo >> ${PROMETHEUS_CONF_PATH} < "  - job_name: "Github-Action"
-        echo >> ${PROMETHEUS_CONF_PATH} < "    scrape_interval: 1s"
-        echo >> ${PROMETHEUS_CONF_PATH} < "    static_configs:"       
+        echo >> ${PROMETHEUS_CONF_PATH} < cat "scrape_configs:"
+        echo >> ${PROMETHEUS_CONF_PATH} < cat "  - job_name: "Github-Action"
+        echo >> ${PROMETHEUS_CONF_PATH} < cat "    scrape_interval: 1s"
+        echo >> ${PROMETHEUS_CONF_PATH} < cat "    static_configs:"       
