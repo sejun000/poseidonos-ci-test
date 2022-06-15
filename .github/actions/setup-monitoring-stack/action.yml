@@ -37,6 +37,6 @@ runs:
       run: sudo pkill -9 pos-exporter
       shell: bash
 
-    - name: "run pos-exporter"
-      run: nohup ${{inputs.POS_WORKING_DIR}}/bin/pos-exporter < /dev/null 1> ${POS_WORKING_DIR}/bin/pos-exporter_stdout.txt  2> ${POS_WORKING_DIR}/bin/pos-exporter_stderr.txt 
-      shell: bash
+#    - name: "run pos-exporter"
+#      run: nohup ${{inputs.POS_WORKING_DIR}}/bin/pos-exporter < /dev/null 1> ${POS_WORKING_DIR}/bin/pos-exporter_stdout.txt  2> ${POS_WORKING_DIR}/bin/pos-exporter_stderr.txt 
+#      shell: bash
