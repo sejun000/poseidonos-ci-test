@@ -32,7 +32,7 @@ jobs:
           ${{github.workspace}}/Dashboard.html
 
   longterm_test:
-    runs-on: VM
+    runs-on: ubuntu-latest
     timeout-minutes: 5000
     steps:
     
