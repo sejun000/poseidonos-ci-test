@@ -47,24 +47,5 @@ runs:
 
     - name: "Prometheus - config setting"
       shell: bash
-      env:
-        PROMETHEUS_CONF_PATH: ${{ inputs.POS_WORKING_DIR }}/config/prometheus.yml
-        
-        GA_COMMIT_HASH: ${{ inputs.GA_COMMIT_HASH }}
-        GA_WORKFLOW: ${{ inputs.GA_WORKFLOW }}
-        GA_DETAIL: ${{ inputs.GA_DETAIL }}
-        
-        AMP_SIGV4_REGION: ${{ inputs.AMP_SIGV4_REGION }}
-        AMP_SIGV4_ACCESS_KEY: ${{ inputs.AMP_SIGV4_ACCESS_KEY }}
-        AMP_SIGV4_SECRET_KEY: ${{ inputs.AMP_SIGV4_SECRET_KEY }}
-      run: |
-        # Prometheus config setting
-        cat > ${PROMETHEUS_CONF_PATH} <<-EOF
-scrape_configs:
-  - job_name: "Github-Action"
-    scrape_interval: 1s
-    static_configs
-EOF
-
-    - run: echo "123"
+      run: echo "123"
       shell: bash
