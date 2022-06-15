@@ -61,7 +61,8 @@ jobs:
         OS_DOMAIN_ENDPOINT: ${{secrets.OS_DOMAIN_ENDPOINT}}
         OS_REGION: ${{secrets.OS_REGION}}
 
-    - run: |
+    - if: always()
+      run: |
         sleep 300
 
     - name: Build Setup
