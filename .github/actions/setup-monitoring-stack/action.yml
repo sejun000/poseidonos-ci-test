@@ -33,11 +33,10 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: echo ${{inputs.POS_WORKING_DIR}}
+    - name: "Clean up pos-exporter"
+      run: sudo pkill -9 pos-exporter
       shell: bash
-    - run: echo ${{inputs.GA_COMMIT_HASH}}
-      shell: bash
-    - run: echo ${{inputs.GA_WORKFLOW}}
-      shell: bash
-    - run: echo ${{inputs.GA_DETAIL}}
+
+    - name: "run pos-exporter"
+      run: nohup ${{inputs.POS_WORKING_DIR}}/bin/pos-exporter < /dev/null 1> ${POS_WORKING_DIR}/bin/pos-exporter_stdout.txt  2> ${POS_WORKING_DIR}/bin/pos-exporter_stderr.txt 
       shell: bash
