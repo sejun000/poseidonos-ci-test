@@ -45,8 +45,7 @@ runs:
 #    - name: "Run pos-exporter"
 #      run: bash nohup ${{inputs.POS_WORKING_DIR}}/bin/pos-exporter < /dev/null 1> ${POS_WORKING_DIR}/bin/pos-exporter_stdout.txt  2> ${POS_WORKING_DIR}/bin/pos-exporter_stderr.txt
 
-    - name: "Deploy Prometheus"
-      env: PROMETHEUS_CONF_PATH: ${{ inputs.POS_WORKING_DIR }}/config/prometheus.yml
+    - name: "Prometheus - config setting"
       shell: bash
       run: |
         # Prometheus config setting
@@ -67,3 +66,5 @@ runs:
 		      				access_key: ${{ inputs.AMP_SIGV4_ACCESS_KEY }}
 		      				secret_key: ${{ inputs.AMP_SIGV4_SECRET_KEY }}
 						EOF
+      env:
+        PROMETHEUS_CONF_PATH: ${{ inputs.POS_WORKING_DIR }}/config/prometheus.yml
