@@ -44,6 +44,7 @@ runs:
         GA_WORKFLOW: ${{ inputs.GA_WORKFLOW }}
         GA_DETAIL: ${{ inputs.GA_DETAIL }}
 
+        AMP_REMOTE_WRITE_URL: ${{ inputs.AMP_REMOTE_WRITE_URL }}
         AMP_SIGV4_REGION: ${{ inputs.AMP_SIGV4_REGION }}
         AMP_SIGV4_ACCESS_KEY: ${{ inputs.AMP_SIGV4_ACCESS_KEY }}
         AMP_SIGV4_SECRET_KEY: ${{ inputs.AMP_SIGV4_SECRET_KEY }}
