@@ -58,7 +58,6 @@ runs:
         AMP_SIGV4_ACCESS_KEY: ${{ inputs.AMP_SIGV4_ACCESS_KEY }}
         AMP_SIGV4_SECRET_KEY: ${{ inputs.AMP_SIGV4_SECRET_KEY }}
       run: |
-        # Prometheus config setting
         cat > ${PROMETHEUS_CONF_PATH} <<-EOF\
 scrape_configs:\
   - job_name: "Github-Action"\
