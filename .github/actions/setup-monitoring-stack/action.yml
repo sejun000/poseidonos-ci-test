@@ -8,3 +8,4 @@ runs:
       shell: bash
 
     - run: echo ${{secrets.GRAFANA_GITHUB_ACTION_DASHBAORD_LINK}}
+      shell: bash
