@@ -102,7 +102,7 @@ runs:
               "message" => "\[%{TIMESTAMP_ISO8601:[@metadata][time]}\]\[%{INT:process_id}\]\[%{INT:thread_id}\]\[%{INT:pos_id}\]\[%{INT:event_id}\]\[\s*%{GREEDYDATA:level}\s*\]\s*%{GREEDYDATA:inner_message}"
             }
             add_field => {
-              "ga_commit_hash" => "${GA_COMMIT_HASH}"
+              "ga_commit_hash" => "${{ inputs.GA_COMMIT_HASH }}"
               "ga_workflow" => "${GA_WORKFLOW}"
               "ga_detail" => "${GA_DETAIL}"
             }
