@@ -47,8 +47,8 @@ runs:
         AMP_SIGV4_SECRET_KEY: ${{ inputs.AMP_SIGV4_SECRET_KEY }}
       run: |
         my_str=$(cat << EOF\
-            scrape_config:\
-              abc:\
-              EOF\
+            123\
+            123\
+            EOF\
               )
         echo ${my_str}
