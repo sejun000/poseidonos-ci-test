@@ -32,19 +32,7 @@ inputs:
   
 runs:
   using: "composite"
-  steps:
-#    - name: "Set environment variable"
-#      env:
-#        PROMETHEUS_CONF_PATH: ${{ inputs.POS_WORKING_DIR}}/config/prometheus.yml
-#        FILEBEAT_CONF_PATH: ${{ inputs.POS_WORKING_DIR}}/config/filebeat.yml
-#        LOGSTASH_CONF_PATH: ${{ inputs.POS_WORKING_DIR}}/config/logstash.conf
-#
-#    - shell: bash
-#      run: echo ${env.PROMETHEUS_CONF_PATH}/${env.FILEBEAT_CONF_PATH}/${env.LOGSTASH_CONF_PATH}
-#
-#    - name: "Run pos-exporter"
-#      run: bash nohup ${{inputs.POS_WORKING_DIR}}/bin/pos-exporter < /dev/null 1> ${POS_WORKING_DIR}/bin/pos-exporter_stdout.txt  2> ${POS_WORKING_DIR}/bin/pos-exporter_stderr.txt
-
+  steps:  
     - name: "Prometheus - config setting"
       shell: bash
       env:
@@ -58,7 +46,7 @@ runs:
         AMP_SIGV4_ACCESS_KEY: ${{ inputs.AMP_SIGV4_ACCESS_KEY }}
         AMP_SIGV4_SECRET_KEY: ${{ inputs.AMP_SIGV4_SECRET_KEY }}
       run: |
-        cat > ${PROMETHEUS_CONF_PATH} <<-EOF\
+        cat>${PROMETHEUS_CONF_PATH}<<\
 scrape_configs:\
   - job_name: "Github-Action"\
     scrape_interval: 1s\
@@ -73,5 +61,4 @@ remote_write:\
     sigv4:\
       region: ${ AMP_SIGV4_REGION }\
       access_key: ${ AMP_SIGV4_ACCESS_KEY }\
-      secret_key: ${ AMP_SIGV4_SECRET_KEY }\
-EOF
+      secret_key: ${ AMP_SIGV4_SECRET_KEY }
