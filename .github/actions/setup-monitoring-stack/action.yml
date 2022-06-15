@@ -37,18 +37,6 @@ runs:
       shell: bash
       env:
         PROMETHEUS_CONF_PATH: ${{ inputs.POS_WORKING_DIR }}/config/prometheus.yml
-        
-        POS_EXPORTER_PORT: ${{ inputs.POS_EXPORTER_PORT }}
-
-        GA_COMMIT_HASH: ${{ inputs.GA_COMMIT_HASH }}
-        GA_WORKFLOW: ${{ inputs.GA_WORKFLOW }}
-        GA_DETAIL: ${{ inputs.GA_DETAIL }}
-
-        AMP_REMOTE_WRITE_URL: ${{ inputs.AMP_REMOTE_WRITE_URL }}
-        AMP_SIGV4_REGION: ${{ inputs.AMP_SIGV4_REGION }}
-        AMP_SIGV4_ACCESS_KEY: ${{ inputs.AMP_SIGV4_ACCESS_KEY }}
-        AMP_SIGV4_SECRET_KEY: ${{ inputs.AMP_SIGV4_SECRET_KEY }}
-
       run: |
         # Set Prometheus Config
         cat > ${PROMETHEUS_CONF_PATH} <<-EOF
@@ -56,17 +44,17 @@ runs:
           - job_name: "Github-Action"
             scrape_interval: 1s
             static_configs:
-              - targets: ["$(hostname -i):${POS_EXPORTER_PORT}"]
+              - targets: ["$(hostname -i):${{ inputs.POS_EXPORTER_PORT }}"]
                 labels:
-                  ga_commit_hash: "${GA_COMMIT_HASH}"
-                  ga_workflow: "${GA_WORKFLOW}"
-                  ga_detail: "${GA_DETAIL}"
+                  ga_commit_hash: "${{ inputs.GA_COMMIT_HASH }}"
+                  ga_workflow: "${{ inputs.GA_WORKFLOW }}"
+                  ga_detail: "${{ inputs.GA_DETAIL }}"
         remote_write:
-          - url: ${AMP_REMOTE_WRITE_URL}
+          - url: ${{ inputs.AMP_REMOTE_WRITE_URL }}
             sigv4:
-              region: ${AMP_SIGV4_REGION}
-              access_key: ${AMP_SIGV4_ACCESS_KEY}
-              secret_key: ${AMP_SIGV4_SECRET_KEY}
+              region: ${{ inputs.AMP_SIGV4_REGION }}
+              access_key: ${{ inputs.AMP_SIGV4_ACCESS_KEY }}
+              secret_key: ${{ inputs.AMP_SIGV4_SECRET_KEY }}
         EOF
         
         # Run Prometheus
@@ -79,13 +67,7 @@ runs:
     - name: "Deploying Logstash"
       shell: bash
       env:
-        LOGSTASH_CONF_PATH: ${{ inputs.POS_WORKING_DIR }}/config/filebeat.yml
-        
-        LOGSTASH_PORT: ${{ inputs.LOGSTASH_PORT }}
-        
-        OS_DOMAIN_ENDPOINT: ${{ inputs.OS_DOMAIN_ENDPOINT }}
-        OS_REGION: ${{ inputs.OS_REGION }}
-        
+        LOGSTASH_CONF_PATH: ${{ inputs.POS_WORKING_DIR }}/config/logstash.conf
       run: |
         # Set Logstash Config
         cat > ${LOGSTASH_CONF_PATH} <<-EOF
@@ -103,8 +85,8 @@ runs:
             }
             add_field => {
               "ga_commit_hash" => "${{ inputs.GA_COMMIT_HASH }}"
-              "ga_workflow" => "${GA_WORKFLOW}"
-              "ga_detail" => "${GA_DETAIL}"
+              "ga_workflow" => "${{ inputs.GA_WORKFLOW }}"
+              "ga_detail" => "${{ inputs.GA_DETAIL }}"
             }
           }
           
@@ -124,9 +106,9 @@ runs:
             hosts  => ["${OS_DOMAIN_ENDPOINT}:443"]
             auth_type => {
               type => 'aws_iam'
-              aws_access_key_id => '${AMP_SIGV4_ACCESS_KEY}'
-              aws_secret_access_key => '${AMP_SIGV4_SECRET_KEY}'
-              region => '${OS_REGION}'
+              aws_access_key_id => '${{ inputs.AMP_SIGV4_ACCESS_KEY }}'
+              aws_secret_access_key => '${{ inputs.AMP_SIGV4_SECRET_KEY }}'
+              region => '${{ inputs.OS_REGION }}'
             }
             index => "github-action-pos-log-$(echo ${GA_COMMIT_HASH} | tr '[:upper:]' '[:lower:]')"
           }
@@ -136,14 +118,14 @@ runs:
         # Run Logstash
         docker run \
                -d \
-               -p ${LOGSTASH_PORT}:${LOGSTASH_PORT} \
+               -p ${{ inputs.LOGSTASH_PORT }}:${{ inputs.LOGSTASH_PORT }} \
                -v ${LOGSTASH_CONF_PATH}:/usr/share/logstash/pipeline/logstash.conf \
                opensearchproject/logstash-oss-with-opensearch-output-plugin
     
     - name: "Deploying Filebeat"
       shell: bash
       env:
-        FILEBEAT_CONF_PATH: ${{ inputs.POS_WORKING_DIR }}/config/logstash.conf
+        FILEBEAT_CONF_PATH: ${{ inputs.POS_WORKING_DIR }}/config/filebeat.yml
       run: |
         # Set Filebeat Config
         cat > ${FILEBEAT_CONF_PATH} <<-EOF
@@ -153,7 +135,7 @@ runs:
         	paths:
         	  - /mnt/log/pos/pos.log
         output.logstash:
-          hosts: ["$(hostname -i):${LOGSTASH_PORT}"]
+          hosts: ["$(hostname -i):${{ inputs.LOGSTASH_PORT }}"]
         EOF
         
         # Run Filebeat
