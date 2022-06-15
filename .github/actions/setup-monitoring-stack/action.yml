@@ -34,7 +34,7 @@ runs:
   using: "composite"
   steps:
     - name: "Clean up pos-exporter"
-      run: sudo pkill -9 pos-exporter
+      run: pkill -9 pos-exporter
       shell: bash
 
 #    - name: "run pos-exporter"
