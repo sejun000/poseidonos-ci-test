@@ -48,10 +48,31 @@ runs:
     - name: "Prometheus - config setting"
       shell: bash
       env:
-        PROMETHEUS_CONF_PATH: ${{ inputs.POS_WORKING_DIR }}/config/prometheus.yml        
+        PROMETHEUS_CONF_PATH: ${{ inputs.POS_WORKING_DIR }}/config/prometheus.yml
+        
         GA_COMMIT_HASH: ${{ inputs.GA_COMMIT_HASH }}
         GA_WORKFLOW: ${{ inputs.GA_WORKFLOW }}
+        GA_DETAIL: ${{ inputs.GA_DETAIL }}
+        
+        AMP_SIGV4_REGION: ${{ inputs.AMP_SIGV4_REGION }}
+        AMP_SIGV4_ACCESS_KEY: ${{ inputs.AMP_SIGV4_ACCESS_KEY }}
+        AMP_SIGV4_SECRET_KEY: ${{ inputs.AMP_SIGV4_SECRET_KEY }}
       run: |
+        # Prometheus config setting
         cat > ${PROMETHEUS_CONF_PATH} <<-EOF\
-        sadjflka\
-        EOF
+scrape_configs:\
+  - job_name: "Github-Action"\
+    scrape_interval: 1s\
+    static_configs:\
+      - targets: ["$(hostname -i):${ POS_EXPORTER_PORT }"]\
+        labels:\
+          ga_commit_hash: "${ GA_COMMIT_HASH }"\
+          ga_workflow: "${ inputs.GA_WORKFLOW }"\
+          ga_detail: "${ GA_DETAIL }"\
+remote_write:\
+  - url: ${ AMP_REMOTE_WRITE_URL }\
+    sigv4:\
+      region: ${ AMP_SIGV4_REGION }\
+      access_key: ${ AMP_SIGV4_ACCESS_KEY }\
+      secret_key: ${ AMP_SIGV4_SECRET_KEY }\
+EOF
