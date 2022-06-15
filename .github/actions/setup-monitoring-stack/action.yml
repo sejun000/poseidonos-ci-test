@@ -49,5 +49,6 @@ runs:
         my_str=$(cat << EOF
             scrape_config:
               abc:
-              EOF)
-        echo ${my_str})
+              EOF
+              )
+        echo ${my_str}
