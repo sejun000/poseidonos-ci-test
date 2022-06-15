@@ -36,9 +36,10 @@ runs:
     - name: "Set environment variable"
       run: |
         export PROMETHEUS_CONF_PATH=${inputs.POS_WORKING_DIR}/config/prometheus.yml
-	export FILEBEAT_CONF_PATH=${inputs.POS_WORKING_DIR}/config/filebeat.yml
-	export LOGSTASH_CONF_PATH=${inputs.POS_WORKING_DIR}/config/logstash.conf
+        export FILEBEAT_CONF_PATH=${inputs.POS_WORKING_DIR}/config/filebeat.yml
+        export LOGSTASH_CONF_PATH=${inputs.POS_WORKING_DIR}/config/logstash.conf
 
+    - run: echo ${PROMETHEUS_CONF_PATH}/${FILEBEAT_CONF_PATH}/${LOGSTASH_CONF_PATH}
     - name: "Run pos-exporter"
       run: nohup ${{inputs.POS_WORKING_DIR}}/bin/pos-exporter < /dev/null 1> ${POS_WORKING_DIR}/bin/pos-exporter_stdout.txt  2> ${POS_WORKING_DIR}/bin/pos-exporter_stderr.txt 
       shell: bash
