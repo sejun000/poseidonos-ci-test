@@ -53,5 +53,5 @@ runs:
         GA_WORKFLOW: ${{ inputs.GA_WORKFLOW }}
       run: |
         cat > ${PROMETHEUS_CONF_PATH} <<-EOF\
-        sadjflka
+        sadjflka\
         EOF
