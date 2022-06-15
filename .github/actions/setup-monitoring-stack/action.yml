@@ -37,6 +37,8 @@ runs:
       shell: bash
       env:
         PROMETHEUS_CONF_PATH: ${{ inputs.POS_WORKING_DIR }}/config/prometheus.yml
+        
+        POS_EXPORTER_PORT: ${{ inputs.POS_EXPORTER_PORT }}
 
         GA_COMMIT_HASH: ${{ inputs.GA_COMMIT_HASH }}
         GA_WORKFLOW: ${{ inputs.GA_WORKFLOW }}
