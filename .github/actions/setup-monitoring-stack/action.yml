@@ -1,0 +1,10 @@
+name: "Setup Monitoring"
+Description: "This action deploy monitoring stacks for poseidonos"
+
+runs:
+  using: "composite"
+  steps:
+    - run: echo $(date)
+      shell: bash
+
+    - run: echo ${{secrets.GRAFANA_GITHUB_ACTION_DASHBAORD_LINK}}

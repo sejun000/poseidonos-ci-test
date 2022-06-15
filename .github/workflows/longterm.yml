@@ -2,8 +2,8 @@
 name: M9-LongTerm_VM_Test
 
 on:
-  schedule:
-    - cron: '0 1 * * *'
+  push:
+      branches: [ create-* ] 
 
   workflow_dispatch:
     inputs:
@@ -40,6 +40,11 @@ jobs:
         sudo chown -R $USER:$USER $GITHUB_WORKSPACE
 
     - uses: actions/checkout@v2
+
+    - uses: ./.github/actions/setup-monitoring-stack
+
+    - run: |
+        sleep 300
 
     - name: Build Setup
       working-directory: ${{github.workspace}}
