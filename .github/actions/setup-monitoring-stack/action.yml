@@ -9,7 +9,27 @@ inputs:
     required: true
   GA_DETAIL:
     required: true
+    
+  POS_EXPORTER_PORT:
+    required: true
 
+  AMP_REMOTE_WRITE_URL:
+    required: true
+  AMP_SIGV4_REGION:
+    required: true
+  AMP_SIGV4_ACCESS_KEY:
+    required: true
+  AMP_SIGV4_SECRET_KEY:
+    required: true
+  
+  LOGSTASH_PORT:									      
+    required: true
+  
+  OS_DOMAIN_ENDPOINT:
+    required: true
+  OS_REGION:
+    required: true
+  
 runs:
   using: "composite"
   steps:
@@ -20,6 +40,4 @@ runs:
     - run: echo ${{inputs.GA_WORKFLOW}}
       shell: bash
     - run: echo ${{inputs.GA_DETAIL}}
-      shell: bash
-    - run: echo ${{secrets.AMP_REMOTE_WRITE_URL}}
       shell: bash
