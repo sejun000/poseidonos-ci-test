@@ -47,4 +47,11 @@ runs:
 
     - name: "Prometheus - config setting"
       shell: bash
-      run: echo "123"
+      env:
+        PROMETHEUS_CONF_PATH: ${{ inputs.POS_WORKING_DIR }}/config/prometheus.yml        
+        GA_COMMIT_HASH: ${{ inputs.GA_COMMIT_HASH }}
+        GA_WORKFLOW: ${{ inputs.GA_WORKFLOW }}
+      run: |
+        cat > ${PROMETHEUS_CONF_PATH} <<-EOF\
+        sadjflka
+        EOF
