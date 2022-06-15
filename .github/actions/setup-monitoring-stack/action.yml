@@ -32,19 +32,20 @@ inputs:
   
 runs:
   using: "composite"
-  steps:  
+  steps:
     - name: "Prometheus - config setting"
       shell: bash
       env:
         PROMETHEUS_CONF_PATH: ${{ inputs.POS_WORKING_DIR }}/config/prometheus.yml
-        
+
         GA_COMMIT_HASH: ${{ inputs.GA_COMMIT_HASH }}
         GA_WORKFLOW: ${{ inputs.GA_WORKFLOW }}
         GA_DETAIL: ${{ inputs.GA_DETAIL }}
-        
+
         AMP_SIGV4_REGION: ${{ inputs.AMP_SIGV4_REGION }}
         AMP_SIGV4_ACCESS_KEY: ${{ inputs.AMP_SIGV4_ACCESS_KEY }}
         AMP_SIGV4_SECRET_KEY: ${{ inputs.AMP_SIGV4_SECRET_KEY }}
+
       run: |
         cat > ${PROMETHEUS_CONF_PATH} <<-EOF
         scrape_configs:
@@ -63,3 +64,9 @@ runs:
               access_key: ${AMP_SIGV4_ACCESS_KEY}
               secret_key: ${AMP_SIGV4_SECRET_KEY}
         EOF
+        
+        docker run \
+               -d \
+               -p 9090:9090 \
+               -v ${PROMETHEUS_CONF_PATH}:/etc/prometheus/prometheus.yml \
+               prom/prometheus
