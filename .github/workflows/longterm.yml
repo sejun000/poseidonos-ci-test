@@ -46,7 +46,7 @@ jobs:
         POS_WORKING_DIR: ${{github.workspace}}
         GA_COMMIT_HASH: ${{github.sha}}
         GA_WORKFLOW: ${{github.workflow}}
-        GA_DETAIL: NULL
+        GA_DETAIL: "NULL"
 
     - run: |
         sleep 300
