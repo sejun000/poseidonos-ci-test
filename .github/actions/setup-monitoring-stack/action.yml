@@ -79,7 +79,7 @@ runs:
     - name: "Deploying Logstash"
       shell: bash
       env:
-        LOGSTASH_CONF_PATH: ${POS_WORKING_DIR}/config/filebeat.yml
+        LOGSTASH_CONF_PATH: ${{ inputs.POS_WORKING_DIR }}/config/filebeat.yml
         
         LOGSTASH_PORT: ${{ inputs.LOGSTASH_PORT }}
         
@@ -143,7 +143,7 @@ runs:
     - name: "Deploying Filebeat"
       shell: bash
       env:
-        LOGSTASH_CONF_PATH: ${POS_WORKING_DIR}/config/logstash.conf
+        FILEBEAT_CONF_PATH: ${{ inputs.POS_WORKING_DIR }}/config/logstash.conf
       run: |
         # Set Filebeat Config
         cat > ${FILEBEAT_CONF_PATH} <<-EOF
