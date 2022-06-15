@@ -48,4 +48,3 @@ runs:
     - name: "Prometheus - config setting"
       shell: bash
       run: echo "123"
-      shell: bash
