@@ -57,7 +57,7 @@ jobs:
         AMP_SIGV4_SECRET_KEY: ${{secrets.AMP_SIGV4_SECRET_KEY}}
 
         LOGSTASH_PORT: ${{secrets.LOGSTASH_PORT}}
-	
+
         OS_DOMAIN_ENDPOINT: ${{secrets.OS_DOMAIN_ENDPOINT}}
         OS_REGION: ${{secrets.OS_REGION}}
 
