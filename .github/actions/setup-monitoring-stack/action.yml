@@ -50,4 +50,4 @@ runs:
             scrape_config:
               abc:
               EOF)
-        echo ${my_str}
+        echo ${my_str})
