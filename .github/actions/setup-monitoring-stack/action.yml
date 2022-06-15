@@ -46,9 +46,7 @@ runs:
         AMP_SIGV4_ACCESS_KEY: ${{ inputs.AMP_SIGV4_ACCESS_KEY }}
         AMP_SIGV4_SECRET_KEY: ${{ inputs.AMP_SIGV4_SECRET_KEY }}
       run: |
-        my_str=$(cat <<-EOF\
-            123\
-            123\
-            EOF\
-              )
-        echo ${my_str}
+        cat > ${PROMETHEUS_CONF_PATH} <<-EOF
+        HIHI:
+          REAL: adf
+        EOF
