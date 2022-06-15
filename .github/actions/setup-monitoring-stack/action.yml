@@ -63,18 +63,7 @@ runs:
 scrape_configs:
   - job_name: "Github-Action"
     scrape_interval: 1s
-    static_configs:
-      - targets: ["$(hostname -i):${ POS_EXPORTER_PORT }"]
-        labels:
-          ga_commit_hash: "${ GA_COMMIT_HASH }"
-          ga_workflow: "${ inputs.GA_WORKFLOW }"
-          ga_detail: "${ GA_DETAIL }"
-remote_write:
-  - url: ${ AMP_REMOTE_WRITE_URL }
-    sigv4:
-      region: ${ AMP_SIGV4_REGION }
-      access_key: ${ AMP_SIGV4_ACCESS_KEY }
-      secret_key: ${ AMP_SIGV4_SECRET_KEY }
+    static_configs
 EOF
 
     - run: echo "123"
