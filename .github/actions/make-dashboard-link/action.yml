@@ -17,7 +17,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: "Make Dashboard Link"
+    - name: "Make POS Monitoring Dashboard Link"
       shell: bash
       run: |
         START_TIME=$(( $(date +%s) * 1000 ))
