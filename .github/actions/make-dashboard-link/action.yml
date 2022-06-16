@@ -1,4 +1,4 @@
-name: "Make Monitoring Dashboard Link"
+name: "Make POS Monitoring Dashboard Link"
 Description: "This action sets POS monitoring dashboard link"
 inputs:
   POS_WORKING_DIR:
