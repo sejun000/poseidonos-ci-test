@@ -22,7 +22,7 @@ runs:
       run: |
         START_TIME=$(( $(date +%s) * 1000 ))
         GRAFANA_DASHBOARD_DIRECT=$(echo ${{ inputs.GRAFANA_DASHBOARD}}"&refresh=10s&from=${{ inputs.START_TIME }}&to=${{ inputs.START_TIME }}+${{ inputs.ESTIMATED_EXECUTION_TIME }}&var-ga_commit_hash=${{ inputs.GA_COMMIT_HASH }}&var-ga_workflow=${{ inputs.GA_WORKFLOW }}" | sed 's/#/%23/g')
-        cat > ${POS_WORKING_DIR}/Dashboard.html <<-EOF
+        cat > ${{ inputs.POS_WORKING_DIR }}/Dashboard.html <<-EOF
           <html>
             <body>
               <p> Redirect to Dashboard soon </p>
