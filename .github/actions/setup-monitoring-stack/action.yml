@@ -1,11 +1,14 @@
-name: "Setup Monitoring"
-Description: "This action deploys monitoring stacks for poseidonos"
+name: "Setup Monitoring Stack"
+Description: "This action deploys monitoring stack(prometheus, filebeat, logstash) for poseidonos"
 inputs:
   POS_WORKING_DIR: required: true
   
-  GA_COMMIT_HASH:   required: true
-  GA_WORKFLOW:      required: true
-  GA_DETAIL:        required: true
+  GA_COMMIT_HASH:
+    required: true
+  GA_WORKFLOW:
+    required: true
+  GA_DETAIL:
+    required: true
     
   POS_EXPORTER_PORT:
     required: true
