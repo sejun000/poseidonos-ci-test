@@ -131,9 +131,9 @@ runs:
         cat > ${FILEBEAT_CONF_PATH} <<-EOF
         filebeat.inputs:
           - type: log
-        	  enabled: true
-        	  paths:
-        	    - /mnt/log/pos/pos.log
+            enabled: true
+            paths:
+              - /mnt/log/pos/pos.log
         output.logstash:
           hosts: ["$(hostname -i):${{ inputs.LOGSTASH_PORT }}"]
         EOF
