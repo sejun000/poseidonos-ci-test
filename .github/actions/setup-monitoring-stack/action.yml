@@ -1,5 +1,5 @@
 name: "Setup Monitoring Stack"
-Description: "This action deploys monitoring stack(prometheus, filebeat, logstash) for poseidonos"
+Description: "This action deploys monitoring stack(pos-exporter, prometheus, filebeat, logstash) for poseidonos"
 inputs:
   POS_WORKING_DIR: required: true
   
@@ -33,6 +33,15 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: "Run Pos-exporter"
+      shell: bash
+      run: |
+        nohup ${{ inputs.POS_WORKING_DIR }}/bin/pos-exporter \
+            < /dev/null \
+            1> ${{ inputs.POS_WORKING_DIR }}/bin/pos-exporter_stdout.txt \
+            2> ${{ inputs.POS_WORKING_DIR }}/bin/pos-exporter_stderr.txt \
+            &
+  
     - name: "Deploying Prometheus"
       shell: bash
       env:
