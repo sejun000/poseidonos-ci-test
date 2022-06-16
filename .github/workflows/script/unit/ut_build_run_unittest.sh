@@ -16,7 +16,6 @@ cd ${pos_working_dir}/test/; sudo cmake .
 retVal=$?
 if [ $retVal -ne 0 ]; then
     echo "Cannot proceed due to cmake error."
-    cd ${pos_working_dir}/test/regression/; echo ${retVal} > utbuildtest
     exit $retVal
 fi
 
