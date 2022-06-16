@@ -73,8 +73,8 @@ runs:
         cat > ${LOGSTASH_CONF_PATH} <<-EOF
         input {
           beats {
-        	  port => 5045
-        	  type => "POS-Log-from-Github-Action"
+            port => 5045
+            type => "POS-Log-from-Github-Action"
           }
         }
         
@@ -103,14 +103,14 @@ runs:
         
         output {
           opensearch {
-            hosts  => ["${OS_DOMAIN_ENDPOINT}:443"]
+            hosts  => ["${{ inputs.OS_DOMAIN_ENDPOINT }}:443"]
             auth_type => {
               type => 'aws_iam'
               aws_access_key_id => '${{ inputs.AMP_SIGV4_ACCESS_KEY }}'
               aws_secret_access_key => '${{ inputs.AMP_SIGV4_SECRET_KEY }}'
               region => '${{ inputs.OS_REGION }}'
             }
-            index => "github-action-pos-log-$(echo ${GA_COMMIT_HASH} | tr '[:upper:]' '[:lower:]')"
+            index => "github-action-pos-log-$(echo ${{ inputs.GA_COMMIT_HASH }} | tr '[:upper:]' '[:lower:]')"
           }
         }
         EOF
@@ -131,9 +131,9 @@ runs:
         cat > ${FILEBEAT_CONF_PATH} <<-EOF
         filebeat.inputs:
           - type: log
-        	enabled: true
-        	paths:
-        	  - /mnt/log/pos/pos.log
+        	  enabled: true
+        	  paths:
+        	    - /mnt/log/pos/pos.log
         output.logstash:
           hosts: ["$(hostname -i):${{ inputs.LOGSTASH_PORT }}"]
         EOF
