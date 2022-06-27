@@ -2,9 +2,8 @@
 name: Package_Upload
 
 on:
-  pull_request:
-    branches: [ AWIBOF-6460-build-package-test ]
-
+  push:
+    branches: [AWIBOF-6460-build-package-test]
 
   workflow_dispatch:
     inputs:
