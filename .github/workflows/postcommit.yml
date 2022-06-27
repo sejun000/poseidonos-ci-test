@@ -3,7 +3,7 @@ name: M1-PostVM_Test
 
 on:
   push:
-    branches: [ main ] 
+    branches: [ feature/* ] 
 
   workflow_dispatch:
     inputs:
@@ -68,6 +68,7 @@ jobs:
     - name: Volume Test
       working-directory: ${{github.workspace}}
       run: |
+        chmod +x .github/workflows/script/volume/volume.sh
         .github/workflows/script/volume/volume.sh ${{github.workspace}}
 
     - name: Upload POS log
