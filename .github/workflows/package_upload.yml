@@ -44,4 +44,4 @@ jobs:
 
   Call_Precommit_Test:
     needs: Upload_Package
-    uses: ${{github.workspace}}/.github/workflows/precommit.yml
+    uses: ./.github/workflows/precommit.yml
