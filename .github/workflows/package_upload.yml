@@ -42,6 +42,6 @@ jobs:
         path: |
           ${{github.workspace}}/package/debian/poseidonos.deb
 
-  Call_Precommit_Test:
-    needs: Upload_Package
-    uses: ./.github/workflows/precommit.yml
+          #  Call_Precommit_Test:
+          #    needs: Upload_Package
+          #    uses: ./.github/workflows/precommit.yml
