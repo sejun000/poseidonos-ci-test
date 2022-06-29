@@ -3,7 +3,7 @@ name: Package_Upload
 
 on:
   push:
-    branches: [AWIBOF-6460-build-package-test]
+    branches: [ AWIBOF-6460-build-package-test ]
 
   workflow_dispatch:
     inputs:
@@ -18,7 +18,6 @@ jobs:
   Upload_Package:
     runs-on: ubuntu-18.04
     steps:
-    
     - run: |
         sudo chown -R $USER:$USER $GITHUB_WORKSPACE
 
