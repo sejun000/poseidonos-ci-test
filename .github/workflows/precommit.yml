@@ -33,10 +33,9 @@ jobs:
       run: |
        sudo apt install ./poseidonos.deb -y
        sudo ./script/pkgdep.sh
+       sudo ./lib/build_lib_internal.sh
        mkdir bin
        sudo cp /usr/local/bin/pos* bin/
-       sudo chown -R $USER:$USER $GITHUB_WORKSPACE
-    
 
     - name: IO + Exception Simple
       id: io_exception_simple
