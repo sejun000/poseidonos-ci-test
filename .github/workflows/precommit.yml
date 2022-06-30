@@ -32,6 +32,7 @@ jobs:
       working-directory: ${{github.workspace}}
       run: |
        sudo apt install ./poseidonos.deb -y
+       sudo ./script/pkgdep.sh
        mkdir bin
        sudo cp /usr/local/bin/pos* bin/
     
