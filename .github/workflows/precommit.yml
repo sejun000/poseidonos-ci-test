@@ -35,6 +35,7 @@ jobs:
        sudo ./script/pkgdep.sh
        mkdir bin
        sudo cp /usr/local/bin/pos* bin/
+       sudo chown -R $USER:$USER $GITHUB_WORKSPACE
     
 
     - name: IO + Exception Simple
