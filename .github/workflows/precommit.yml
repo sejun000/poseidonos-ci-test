@@ -33,7 +33,7 @@ jobs:
       run: |
        sudo apt install ./poseidonos.deb -y
        sudo ./script/pkgdep.sh
-       sudo ./lib/build_lib_internal.sh
+       sudo ./lib/build_lib.sh
        mkdir bin
        sudo cp /usr/local/bin/pos* bin/
 
