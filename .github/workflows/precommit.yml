@@ -31,7 +31,8 @@ jobs:
     - name: Build Setup
       working-directory: ${{github.workspace}}
       run: | 
-       unzip ${{github.workspace}}/poseidonos.deb.zip
+       sudo chown -R $USER:$USER poseidonos.deb.zip
+       unzip poseidonos.deb.zip
        sudo apt purge poseidonos
        sudo apt install ./poseidonos.deb -y
        mkdir bin
