@@ -31,7 +31,6 @@ jobs:
     - name: Build Setup
       working-directory: ${{github.workspace}}
       run: |
-       sudo apt purge poseidonos
        sudo apt install ./poseidonos.deb -y
        mkdir bin
        sudo cp /usr/local/bin/pos* bin/
