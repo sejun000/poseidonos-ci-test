@@ -16,7 +16,7 @@ on:
 
 jobs:
   Upload_Package:
-    runs-on: ubuntu-18.04
+    runs-on: VM
     steps:
     - run: |
         sudo chown -R $USER:$USER $GITHUB_WORKSPACE
