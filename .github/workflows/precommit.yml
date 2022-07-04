@@ -140,6 +140,7 @@ jobs:
         sudo ./script/pkgdep.sh
         sudo ./lib/build_lib.sh
         sudo ./script/setup_env.sh
+        mkdir bin
         sudo cp /usr/local/bin/pos* bin/
         #sudo ./script/build_ibofos.sh
     
