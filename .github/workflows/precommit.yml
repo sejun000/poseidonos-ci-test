@@ -64,7 +64,7 @@ jobs:
     runs-on: VM
     steps:
 
-    - run: |http://sec.media.samsung.net/news/detail?brdNo=11&artiId=220704004253263139306278&origin=URL
+    - run: |
         sudo chown -R $USER:$USER $GITHUB_WORKSPACE
 
     - uses: actions/checkout@v2
