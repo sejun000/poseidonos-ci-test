@@ -20,8 +20,6 @@ on:
 jobs:
   Upload_Package:
     runs-on: VM
-    env:
-      SHA7: ${GITHUB_SHA::7}
     steps:
     - run: |
         sudo chown -R $USER:$USER $GITHUB_WORKSPACE
@@ -40,9 +38,13 @@ jobs:
       run: |
         sudo make package -j8
 
+    - name: Set ouputs
+      id: vars
+      run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
     - name: Package artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: poseidonos-$SHA7.deb
+        name: poseidonos-${{ steps.vars.outputs.sha_short }}.deb
         path: |
           ${{github.workspace}}/package/debian/poseidonos.deb
