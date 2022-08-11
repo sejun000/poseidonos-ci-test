@@ -39,12 +39,13 @@ jobs:
         sudo make package -j8
 
     - name: Set ouputs
-      id: vars
-      run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+      #id: vars
+      #run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+      run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`" >> $GITHUB_ENV
 
     - name: Package artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: poseidonos-${{ steps.vars.outputs.sha_short }}.deb
+        name: poseidonos-${SHORT_SHA}.deb
         path: |
           ${{github.workspace}}/package/debian/poseidonos.deb
