@@ -43,6 +43,6 @@ jobs:
     - name: Package artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: poseidonos-${{ env.SHA7 }}.deb
+        name: poseidonos-$SHA7.deb
         path: |
           ${{github.workspace}}/package/debian/poseidonos.deb
