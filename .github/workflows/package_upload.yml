@@ -22,6 +22,7 @@ jobs:
       with:
         repository: ${{ github.event.inputs.owner }}/poseidonos
         ref: ${{ github.event.inputs.branch }}
+        path: ${{github.workspace}}
 
     - name: Build Setup
       working-directory: ${{github.workspace}}
