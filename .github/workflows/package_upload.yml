@@ -29,10 +29,13 @@ jobs:
         sudo apt update
         chmod +x .github/workflows/script/build_setup.sh
         .github/workflows/script/build_setup.sh -r ${{ github.event.inputs.sha }} -d ${{github.workspace}}/../poseidonos -c --with-fpic
+
     - name: package build
       working-directory: ${{github.workspace}}/../poseidonos
       run: |
         sudo make package -j8
+        mv package/debian/poseidonos.deb ${{github.workspace}}
+
     - name: Set ouputs
       working-directory: ${{github.workspace}}/../poseidonos
       id: vars
@@ -43,4 +46,4 @@ jobs:
       with:
         name: poseidonos-${{ steps.vars.outputs.sha_short }}.deb
         path: |
-          ${{github.workspace}}/../poseidonos/package/debian/poseidonos.deb
+          ${{github.workspace}}/poseidonos.deb
